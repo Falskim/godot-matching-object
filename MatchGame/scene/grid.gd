@@ -70,12 +70,15 @@ func is_in_grid(grid_position):
 		return false
 	return true
 
+func is_already_clicked(grid_position):
+	return all_tiles[grid_position.x][grid_position.y] == null
+	
 func input_register():
 	if Input.is_action_just_pressed("ui_touch"):
 		var curr_position = pixel_to_grid(get_global_mouse_position())
 		print("Clicked !")
 				
-		if is_in_grid(curr_position):
+		if is_in_grid(curr_position) and !is_already_clicked(curr_position):
 			check_tile(curr_position)
 			# Debug
 			if debug:
@@ -83,10 +86,11 @@ func input_register():
 				
 func check_tile(input_position):
 	var chosen_keyword = all_tiles[input_position.x][input_position.y].names
-	is_keyword_same(chosen_keyword)
+	if is_keyword_same(chosen_keyword):
+		destroy_tile(input_position)
 
 func is_keyword_same(chosen_keyword):
-	var label_keyword = get_parent().get_node("keyword_label").get_text()# Debug
+	var label_keyword = get_parent().get_node("keyword").get_keyword()
 	var result = chosen_keyword == label_keyword
 	# Debug
 	if debug:
@@ -94,6 +98,21 @@ func is_keyword_same(chosen_keyword):
 		print("Label keyword : " + label_keyword)
 		print("Result : " + str(result))
 	return result
+
+func destroy_tile(tile_position):
+	var tile = all_tiles[tile_position.x][tile_position.y]
+	all_tiles[tile_position.x][tile_position.y] = null
+	print(tile)
+	update_score()
+	remove_child(tile)
+
+func update_score():
+	var label = get_parent().get_node("score_label")
+	# Getting current score number
+	var current_score = label.get_text().substr(8, len(label.get_text()))
+	label.score += 100
+	label.update()
+	print(current_score)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

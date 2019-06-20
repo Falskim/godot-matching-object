@@ -3,7 +3,7 @@
 [ext_resource path="res://MatchGame/font/calibri.ttf" type="DynamicFontData" id=1]
 
 [resource]
-size = 50
-outline_size = 4
-outline_color = Color( 0, 0, 0, 1 )
+size = 35
+outline_size = 3
+outline_color = Color( 0.537255, 0.423529, 0.117647, 1 )
 font_data = ExtResource( 1 )
