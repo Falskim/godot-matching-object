@@ -10,23 +10,26 @@ export (int) var offset
 export (bool) var debug = true
 
 # Load all shape 
-var possible_shape = [
-preload("res://MatchGame/scene/tile/circle.tscn"),
-preload("res://MatchGame/scene/tile/cloud.tscn"),
-preload("res://MatchGame/scene/tile/diamond.tscn"),
-preload("res://MatchGame/scene/tile/pentagon.tscn"),
-preload("res://MatchGame/scene/tile/star.tscn"),
-preload("res://MatchGame/scene/tile/triangle.tscn")
-]
+var tiles_resources = []
 
+# All tiles on the grid
 var all_tiles = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
+	prepare_tiles_resources()
 	all_tiles = create_tiles()
 	spawn_tile()
 
+func prepare_tiles_resources():
+	var path = get_parent().get_resource_path()
+	var resource = []
+	for i in path.size():
+		resource.append([])
+		resource[i] = load(path[i])
+	tiles_resources = resource
+	
 func create_tiles():
 	var array = []
 	for i in width:
@@ -36,13 +39,27 @@ func create_tiles():
 	return array
 
 func spawn_tile():
+	var total_object = tiles_resources.size()
+	var object = []
+	for i in total_object:
+		object.append([])
+		object[i] = 0
+	var threshold = (width*height)/total_object
+	
 	for i in width:
 		for j in height:
-			var rand = floor(rand_range(0, possible_shape.size()))
-			var tile = possible_shape[rand].instance()
+			var loop_counter = 0
+			var rand = floor(rand_range(0, tiles_resources.size()))
+			while object[rand] > threshold and loop_counter < 10:
+				rand = floor(rand_range(0, tiles_resources.size()))
+				loop_counter += 1
+			object[rand] += 1
+			var tile = tiles_resources[rand].instance()
 			add_child(tile)
 			tile.position = grid_to_pixel(i, j)
 			all_tiles[i][j] = tile
+	print("Distribution")
+	print(object)
 
 func grid_to_pixel(column, row):
 	var new_x = x_start + (offset * column)
@@ -107,7 +124,7 @@ func destroy_tile(tile_position):
 	remove_child(tile)
 
 func update_score():
-	var label = get_parent().get_node("score_label")
+	var label = get_parent().get_parent().get_node("score_label")
 	# Getting current score number
 	var current_score = label.get_text().substr(8, len(label.get_text()))
 	label.score += 100

@@ -1,76 +1,88 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://MatchGame/art/background 2.png" type="Texture" id=1]
-[ext_resource path="res://MatchGame/font/keyword.tres" type="DynamicFont" id=2]
-[ext_resource path="res://MatchGame/scene/keyword_label.gd" type="Script" id=3]
-[ext_resource path="res://MatchGame/scene/keyword_timer.gd" type="Script" id=4]
-[ext_resource path="res://MatchGame/font/timer.tres" type="DynamicFont" id=5]
-[ext_resource path="res://MatchGame/font/score.tres" type="DynamicFont" id=6]
-[ext_resource path="res://MatchGame/scene/score_label.gd" type="Script" id=7]
-[ext_resource path="res://MatchGame/scene/grid.gd" type="Script" id=8]
+[ext_resource path="res://MatchGame/font/score.tres" type="DynamicFont" id=2]
+[ext_resource path="res://MatchGame/scene/score_label.gd" type="Script" id=3]
+[ext_resource path="res://MatchGame/scene/game.gd" type="Script" id=4]
+[ext_resource path="res://MatchGame/scene/grid.gd" type="Script" id=5]
+[ext_resource path="res://MatchGame/font/keyword.tres" type="DynamicFont" id=6]
+[ext_resource path="res://MatchGame/scene/keyword.gd" type="Script" id=7]
+[ext_resource path="res://MatchGame/scene/keyword_timer.gd" type="Script" id=8]
+[ext_resource path="res://MatchGame/font/timer.tres" type="DynamicFont" id=9]
 
 [node name="game_window" type="Node2D"]
 
 [node name="background" type="TextureRect" parent="."]
-margin_left = -44.0708
-margin_top = 2.14462
-margin_right = 531.929
-margin_bottom = 1026.14
+margin_right = 576.0
+margin_bottom = 1024.0
+rect_scale = Vector2( 0.92, 1 )
 texture = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="keyword" type="Label" parent="."]
-margin_left = 147.721
-margin_top = 91.2064
-margin_right = 363.721
-margin_bottom = 151.206
-grow_horizontal = 2
-grow_vertical = 2
-custom_fonts/font = ExtResource( 2 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "Keyword"
-align = 1
-script = ExtResource( 3 )
-total_keyword = 6
-
-[node name="keyword_timer" type="Timer" parent="keyword"]
-wait_time = 5.0
-autostart = true
-script = ExtResource( 4 )
-
-[node name="time_remaining" type="Label" parent="keyword/keyword_timer"]
-margin_left = 226.101
-margin_top = 157.705
-margin_right = 289.101
-margin_bottom = 193.705
-grow_horizontal = 2
-grow_vertical = 2
-custom_fonts/font = ExtResource( 5 )
-custom_colors/font_color = Color( 0.827451, 0.898039, 0, 1 )
-text = "0.00"
-align = 1
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = 14.0
+margin_top = 218.0
+margin_right = 514.0
+margin_bottom = 968.0
+color = Color( 0.956863, 0.941176, 0.941176, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="score_label" type="Label" parent="."]
 margin_left = 16.8432
 margin_top = 13.0863
 margin_right = 163.843
 margin_bottom = 64.0863
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.721569, 0.956863, 0.764706, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Score : "
-script = ExtResource( 7 )
+script = ExtResource( 3 )
 
-[node name="grid" type="Node2D" parent="."]
-script = ExtResource( 8 )
-width = 8
+[node name="game_controller" type="Node2D" parent="."]
+script = ExtResource( 4 )
+
+[node name="grid" type="Node2D" parent="game_controller"]
+script = ExtResource( 5 )
+width = 7
 height = 10
-x_start = 40
-y_start = 850
-offset = 64
-[connection signal="timeout" from="keyword/keyword_timer" to="keyword/keyword_timer" method="_on_keyword_timer_timeout"]
-[connection signal="timeout" from="keyword/keyword_timer" to="keyword" method="_on_change_timer_timeout"]
+x_start = 55
+y_start = 900
+offset = 70
+
+[node name="keyword" type="Label" parent="game_controller"]
+margin_left = 147.721
+margin_top = 91.2064
+margin_right = 363.721
+margin_bottom = 151.206
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 6 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Keyword"
+align = 1
+script = ExtResource( 7 )
+total_keyword = 6
+
+[node name="keyword_timer" type="Timer" parent="game_controller/keyword"]
+wait_time = 10.0
+autostart = true
+script = ExtResource( 8 )
+
+[node name="time_remaining" type="Label" parent="game_controller/keyword/keyword_timer"]
+margin_left = 226.101
+margin_top = 157.705
+margin_right = 289.101
+margin_bottom = 193.705
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 9 )
+custom_colors/font_color = Color( 0.827451, 0.898039, 0, 1 )
+text = "0.00"
+align = 1
+[connection signal="timeout" from="game_controller/keyword/keyword_timer" to="game_controller/keyword/keyword_timer" method="_on_keyword_timer_timeout"]

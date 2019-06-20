@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/triangle.png-1a24f53477fb4ec2ce5b1db61e527ec0.stex"
+path="res://.import/Shape_0013_Triangle-1.png-3a1efb67a274ff93b38cef977a42ec41.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://MatchGame/art/shape/triangle.png"
-dest_files=[ "res://.import/triangle.png-1a24f53477fb4ec2ce5b1db61e527ec0.stex" ]
+source_file="res://MatchGame/art/shape/Shape_0013_Triangle-1.png"
+dest_files=[ "res://.import/Shape_0013_Triangle-1.png-3a1efb67a274ff93b38cef977a42ec41.stex" ]
 
 [params]
 

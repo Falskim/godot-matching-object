@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/pentagon.png-20f175ac632aaa82872fc413cd3a2ac7.stex"
+path="res://.import/Shape_0019_Rectangle-1.png-94fd0210baa716684b9e4547e89f1fe5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://MatchGame/art/shape/pentagon.png"
-dest_files=[ "res://.import/pentagon.png-20f175ac632aaa82872fc413cd3a2ac7.stex" ]
+source_file="res://MatchGame/art/shape/Shape_0019_Rectangle-1.png"
+dest_files=[ "res://.import/Shape_0019_Rectangle-1.png-94fd0210baa716684b9e4547e89f1fe5.stex" ]
 
 [params]
 

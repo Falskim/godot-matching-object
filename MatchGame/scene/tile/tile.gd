@@ -2,10 +2,6 @@ extends Node2D
 
 export (String) var names
 
-var possible_modulate_color = [
-[1,0,0],[0,1,0],[0,0,1],[1,1,0],[1,0,1],[0,1,1],[1,1,1]
-]
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize_color()
@@ -13,9 +9,9 @@ func _ready():
 
 func randomize_color():
 	randomize()
-	var x = rand_range(0.7, 1)
-	var y = rand_range(0.7, 1)
-	var z = rand_range(0.7, 1)
+	var x = rand_range(0.4, 1)
+	var y = rand_range(0.4, 1)
+	var z = rand_range(0.4, 1)
 	$Sprite.modulate = Color(x,y,z)	
 #	var rand = floor(rand_range(0, possible_modulate_color.size()))
 #	$Sprite.modulate = Color(

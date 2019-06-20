@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/star.png-3f6a1fda2e8e139fad05bf2194e5e535.stex"
+path="res://.import/Shape_0017_Hexagon-1.png-68359ef991ade62103e1065e609ac719.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://MatchGame/art/shape/star.png"
-dest_files=[ "res://.import/star.png-3f6a1fda2e8e139fad05bf2194e5e535.stex" ]
+source_file="res://MatchGame/art/shape/Shape_0017_Hexagon-1.png"
+dest_files=[ "res://.import/Shape_0017_Hexagon-1.png-68359ef991ade62103e1065e609ac719.stex" ]
 
 [params]
 

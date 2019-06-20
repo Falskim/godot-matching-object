@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/circle.png-3c9def92290e6acf3e2cc0f8fff2cd34.stex"
+path="res://.import/Shape_0015_Octagon-1.png-7de45c81f6389fa9e91aa881d59f3b6d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://MatchGame/art/shape/circle.png"
-dest_files=[ "res://.import/circle.png-3c9def92290e6acf3e2cc0f8fff2cd34.stex" ]
+source_file="res://MatchGame/art/shape/Shape_0015_Octagon-1.png"
+dest_files=[ "res://.import/Shape_0015_Octagon-1.png-7de45c81f6389fa9e91aa881d59f3b6d.stex" ]
 
 [params]
 
