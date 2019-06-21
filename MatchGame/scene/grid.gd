@@ -134,9 +134,11 @@ func input_register():
 func check_tile(input_position):
 	var chosen_keyword = all_tiles[input_position.x][input_position.y].names
 	if is_keyword_same(chosen_keyword):
+		get_parent().get_parent().get_node("correct_sound").play()
 		destroy_tile(input_position)
 		respawn_tile(input_position)
 	else:
+		get_parent().get_parent().get_node("wrong_sound").play()
 		emit_signal("wrong_keyword")
 		is_allow_input = false
 
@@ -165,7 +167,7 @@ func respawn_tile(tile_position):
 	all_tiles[tile_position.x][tile_position.y] = tile
 
 func update_score():
-	var label = get_parent().get_parent().get_node("score_label")
+	var label = get_parent().get_parent().get_node("score")
 	# Getting current score number
 	var current_score = label.get_text().substr(8, len(label.get_text()))
 	label.score += 100

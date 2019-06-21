@@ -1,24 +1,38 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=17 format=2]
 
-[ext_resource path="res://MatchGame/art/background 2.png" type="Texture" id=1]
-[ext_resource path="res://MatchGame/font/score.tres" type="DynamicFont" id=2]
-[ext_resource path="res://MatchGame/scene/score_label.gd" type="Script" id=3]
-[ext_resource path="res://MatchGame/scene/game.gd" type="Script" id=4]
-[ext_resource path="res://MatchGame/scene/grid.gd" type="Script" id=5]
-[ext_resource path="res://MatchGame/scene/wrong_timer.gd" type="Script" id=6]
-[ext_resource path="res://MatchGame/font/wrong.tres" type="DynamicFont" id=7]
-[ext_resource path="res://MatchGame/font/keyword.tres" type="DynamicFont" id=8]
-[ext_resource path="res://MatchGame/scene/keyword.gd" type="Script" id=9]
-[ext_resource path="res://MatchGame/scene/keyword_timer.gd" type="Script" id=10]
-[ext_resource path="res://MatchGame/font/timer.tres" type="DynamicFont" id=11]
+[ext_resource path="res://MatchGame/art/backGround.png" type="Texture" id=1]
+[ext_resource path="res://MatchGame/art/Top UI.png" type="Texture" id=2]
+[ext_resource path="res://MatchGame/font/score.tres" type="DynamicFont" id=3]
+[ext_resource path="res://MatchGame/scene/score_label.gd" type="Script" id=4]
+[ext_resource path="res://MatchGame/scene/game.gd" type="Script" id=5]
+[ext_resource path="res://MatchGame/scene/grid.gd" type="Script" id=6]
+[ext_resource path="res://MatchGame/scene/wrong_timer.gd" type="Script" id=7]
+[ext_resource path="res://MatchGame/font/wrong.tres" type="DynamicFont" id=8]
+[ext_resource path="res://MatchGame/font/keyword.tres" type="DynamicFont" id=9]
+[ext_resource path="res://MatchGame/scene/keyword.gd" type="Script" id=10]
+[ext_resource path="res://MatchGame/scene/keyword_timer.gd" type="Script" id=11]
+[ext_resource path="res://MatchGame/font/timer.tres" type="DynamicFont" id=12]
+[ext_resource path="res://MatchGame/sound/timer.ogg" type="AudioStream" id=13]
+[ext_resource path="res://MatchGame/sound/wrong.ogg" type="AudioStream" id=14]
+[ext_resource path="res://MatchGame/sound/correct.ogg" type="AudioStream" id=15]
+[ext_resource path="res://MatchGame/sound/bgm.ogg" type="AudioStream" id=16]
 
 [node name="game_window" type="Node2D"]
 
 [node name="background" type="TextureRect" parent="."]
 margin_right = 576.0
 margin_bottom = 1024.0
-rect_scale = Vector2( 0.92, 1 )
 texture = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = -3.17334
+margin_top = 9.52007
+margin_right = 524.827
+margin_bottom = 309.52
+texture = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -34,23 +48,37 @@ __meta__ = {
 }
 
 [node name="score_label" type="Label" parent="."]
-margin_left = 16.8432
-margin_top = 13.0863
-margin_right = 163.843
-margin_bottom = 64.0863
-custom_fonts/font = ExtResource( 2 )
-custom_colors/font_color = Color( 0.737255, 1, 0, 1 )
+margin_left = 249.12
+margin_top = 17.7241
+margin_right = 396.12
+margin_bottom = 68.7241
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.168627, 0.729412, 0.835294, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "Score : "
-script = ExtResource( 3 )
+text = "Score"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="score" type="Label" parent="."]
+margin_left = 263.0
+margin_top = 49.0
+margin_right = 278.0
+margin_bottom = 72.0
+grow_horizontal = 2
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.243137, 1, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "0"
+script = ExtResource( 4 )
 
 [node name="game_controller" type="Node2D" parent="."]
-script = ExtResource( 4 )
+script = ExtResource( 5 )
 total_keyword = 6
 keyword_time = 5
 
 [node name="grid" type="Node2D" parent="game_controller"]
-script = ExtResource( 5 )
+script = ExtResource( 6 )
 width = 7
 height = 10
 x_start = 55
@@ -58,49 +86,61 @@ y_start = 900
 offset = 70
 
 [node name="wrong_timer" type="Timer" parent="game_controller/grid"]
-script = ExtResource( 6 )
+script = ExtResource( 7 )
 
 [node name="wrong_message" type="Label" parent="game_controller/grid/wrong_timer"]
-margin_left = 211.821
+margin_left = 384.114
 margin_top = 171.51
-margin_right = 306.821
+margin_right = 479.114
 margin_bottom = 207.51
 grow_horizontal = 2
-custom_fonts/font = ExtResource( 7 )
+custom_fonts/font = ExtResource( 8 )
 custom_colors/font_color = Color( 1, 0.172549, 0, 1 )
 text = "Wrong"
 align = 1
 
 [node name="keyword" type="Label" parent="game_controller"]
-margin_left = 147.721
-margin_top = 81.2064
-margin_right = 363.721
-margin_bottom = 141.206
+margin_left = 158.27
+margin_top = 104.303
+margin_right = 374.27
+margin_bottom = 164.303
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 8 )
+custom_fonts/font = ExtResource( 9 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Keyword"
 align = 1
-script = ExtResource( 9 )
+script = ExtResource( 10 )
 
 [node name="keyword_timer" type="Timer" parent="game_controller/keyword"]
 wait_time = 10.0
-script = ExtResource( 10 )
+script = ExtResource( 11 )
 
 [node name="time_remaining" type="Label" parent="game_controller/keyword/keyword_timer"]
-margin_left = 226.101
-margin_top = 131.705
-margin_right = 289.101
-margin_bottom = 167.705
+margin_left = 240.98
+margin_top = 169.31
+margin_right = 303.98
+margin_bottom = 205.31
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 11 )
+custom_fonts/font = ExtResource( 12 )
 custom_colors/font_color = Color( 0.0745098, 0.964706, 0.313726, 1 )
 text = "0.00"
 align = 1
+
+[node name="timer_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+
+[node name="wrong_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+
+[node name="correct_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 15 )
+
+[node name="bgm" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 16 )
 [connection signal="wrong_keyword" from="game_controller/grid" to="game_controller/grid/wrong_timer" method="_on_grid_wrong_keyword"]
 [connection signal="timeout" from="game_controller/grid/wrong_timer" to="game_controller/grid" method="_on_wrong_timer_timeout"]
 [connection signal="timeout" from="game_controller/grid/wrong_timer" to="game_controller/grid/wrong_timer" method="_on_wrong_timer_timeout"]

@@ -40,7 +40,7 @@ var game_type = "shape"
 
 func _ready():
 	get_resource_path()
-	pass
+	play_music()
 
 func get_resource_path():
 	var res = []
@@ -52,7 +52,11 @@ func get_resource_path():
 
 func get_keyword():
 	return keyword
+
+func play_music():
+	get_parent().get_node("bgm").play()
 	
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

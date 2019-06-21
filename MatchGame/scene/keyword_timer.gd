@@ -4,20 +4,36 @@ var keyword
 var label
 var time
 
+# For countdown sound effect
+var countdown_timer = null
+var countdown_played = false
+var countdown_counter = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	wait_time = get_parent().get_parent().keyword_time
 	start()
 	label = get_node("time_remaining")
 	keyword = get_parent()
+	prepare_countdown_timer()
 
 func update_label():
-	time = str(time_left).substr(0, 1)
-	label.set_text(str(int(time) + 1))
+	time = int(str(time_left).substr(0, 1))
+	label.set_text(str(time + 1))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	update_label()
+	if time == 3 and !countdown_played:
+		countdown_timer.start()
+		countdown_played = true
+
+func prepare_countdown_timer():
+	countdown_timer = Timer.new()
+	add_child(countdown_timer)
+	countdown_timer.connect("timeout", self, "_on_Timer_countdown")
+	countdown_timer.set_wait_time(1.0)
+	countdown_timer.set_one_shot(false)
 
 func _on_keyword_timer_timeout():
 	if keyword.has_next_keyword():
@@ -27,3 +43,11 @@ func _on_keyword_timer_timeout():
 		stop()
 		label.set_text("0")
 		set_process(false)
+
+func _on_Timer_countdown():
+	get_parent().get_parent().get_parent().get_node("timer_sound").play()
+	countdown_counter += 1
+	if countdown_counter == 3:
+		countdown_timer.stop()
+		countdown_counter = 0
+		countdown_played = false
