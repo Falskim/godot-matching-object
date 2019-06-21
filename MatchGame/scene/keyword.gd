@@ -1,6 +1,6 @@
 extends Label
 
-export (int) var total_keyword
+var total_keyword
 export (bool) var debug = true
 
 # Possible Keyword
@@ -20,6 +20,7 @@ func _ready():
 
 
 func create_keyword():
+	var total_keyword = get_parent().total_keyword
 	var possible_keyword = get_parent().get_keyword()
 	# An array for checking keyword already used or not, [name][is_used]
 	var temp_keyword = []

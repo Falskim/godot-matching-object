@@ -5,14 +5,17 @@ export (String) var names
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize_color()
-	pass # Replace with function body.
 
 func randomize_color():
 	randomize()
-	var x = rand_range(0.4, 1)
-	var y = rand_range(0.4, 1)
-	var z = rand_range(0.4, 1)
-	$Sprite.modulate = Color(x,y,z)	
+	var r = round(rand_range(0, 1))
+	var g = round(rand_range(0, 1))
+	var b = round(rand_range(0, 1))
+	while (r == 0 and g == 0 and b == 0) or (r == 1 and g == 1 and b == 1):
+		r = round(rand_range(0, 1))
+		g = round(rand_range(0, 1))
+		b = round(rand_range(0, 1))
+	$Sprite.modulate = Color(r,g,b)	
 #	var rand = floor(rand_range(0, possible_modulate_color.size()))
 #	$Sprite.modulate = Color(
 #	possible_modulate_color[rand][0],

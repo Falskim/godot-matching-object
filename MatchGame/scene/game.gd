@@ -23,8 +23,20 @@ var keyword = [
 "heart",
 #"triangle",
 "trapezoid",
-"octagon"
+"octagon",
+"heptagon",
+"hexagon",
+"pentagon",
+"rectangle",
+"square",
+"circle"
 ]
+
+export (int) var total_keyword
+export (int) var keyword_time
+
+# Type game that will used
+var game_type = "shape"
 
 func _ready():
 	get_resource_path()
@@ -35,7 +47,7 @@ func get_resource_path():
 	for i in keyword.size():
 		res.append([])
 		var key = str(keyword[i]).replace(" ", "_")
-		res[i] = "res://MatchGame/scene/tile/" + key + ".tscn"
+		res[i] = "res://MatchGame/scene/" + game_type + "/" + key + ".tscn"
 	return res
 
 func get_keyword():
