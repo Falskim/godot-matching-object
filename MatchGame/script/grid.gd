@@ -10,15 +10,19 @@ export (int) var offset
 # Debug and developing status
 export (bool) var debug = true
 
-# Load all shape resource
+# Load all resource
 var tiles_resources = []
+var explosion_effect = load("res://MatchGame/scene/explosion_effect.tscn")
 
 # All tiles on the grid
 var all_tiles = []
 
-# Signal for if wrong occured
+# Signal if answer is wrong
 signal wrong_keyword
 var is_allow_input = true
+
+# Signal if answer is correct
+signal correct_keyword
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -132,11 +136,13 @@ func input_register():
 				print(curr_position)
 
 func check_tile(input_position):
-	var chosen_keyword = all_tiles[input_position.x][input_position.y].names
-	if is_keyword_same(chosen_keyword):
+	var choosen_keyword = all_tiles[input_position.x][input_position.y].names
+	if is_keyword_same(choosen_keyword):
 		get_parent().get_parent().get_node("correct_sound").play()
 		destroy_tile(input_position)
+		start_effect(explosion_effect, input_position.x, input_position.y)
 		respawn_tile(input_position)
+		emit_signal("correct_keyword")
 	else:
 		get_parent().get_parent().get_node("wrong_sound").play()
 		emit_signal("wrong_keyword")
@@ -159,6 +165,11 @@ func destroy_tile(tile_position):
 	update_score()
 	remove_child(tile)
 
+func start_effect(effect, column, row):
+	var fx = effect.instance()
+	add_child(fx)
+	fx.position = grid_to_pixel(column, row)
+
 func respawn_tile(tile_position):
 	var rand = floor(rand_range(0, tiles_resources.size()))
 	var tile = tiles_resources[rand].instance()
@@ -179,3 +190,6 @@ func _process(delta):
 
 func _on_wrong_timer_timeout():
 	is_allow_input = true
+
+func _on_keyword_timer_game_end():
+	is_allow_input = false

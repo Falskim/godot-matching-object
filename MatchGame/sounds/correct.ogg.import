@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/correct.ogg-81f266728889596224e1f1831abc5c9f.oggstr"
+
+[deps]
+
+source_file="res://MatchGame/sounds/correct.ogg"
+dest_files=[ "res://.import/correct.ogg-81f266728889596224e1f1831abc5c9f.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

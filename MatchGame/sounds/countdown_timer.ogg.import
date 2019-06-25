@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/countdown_timer.ogg-bcf9c084da30f06a300877f90c901383.oggstr"
+
+[deps]
+
+source_file="res://MatchGame/sounds/countdown_timer.ogg"
+dest_files=[ "res://.import/countdown_timer.ogg-bcf9c084da30f06a300877f90c901383.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
