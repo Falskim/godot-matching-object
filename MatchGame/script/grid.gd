@@ -152,15 +152,18 @@ func input_register():
 func check_tile(input_position):
 	var choosen_keyword = all_tiles[input_position.x][input_position.y].names
 	if is_keyword_same(choosen_keyword):
-		get_parent().get_parent().get_node("correct_sound").play()
+		play_sound_effect("correct_sound")
 		destroy_tile(input_position)
 		start_effect(explosion_effect, input_position.x, input_position.y)
 		respawn_tile(input_position)
 		emit_signal("correct_keyword")
 	else:
-		get_parent().get_parent().get_node("wrong_sound").play()
+		play_sound_effect("wrong_sound")
 		emit_signal("wrong_keyword")
 		is_allow_input = false
+
+func play_sound_effect(effect):
+	get_parent().get_node(effect).play()
 
 func is_keyword_same(chosen_keyword):
 	var label_keyword = get_parent().get_node("keyword").get_keyword()
@@ -192,7 +195,7 @@ func respawn_tile(tile_position):
 	all_tiles[tile_position.x][tile_position.y] = tile
 
 func update_score():
-	var label = get_parent().get_parent().get_node("score")
+	var label = get_parent().get_node("score")
 	# Getting current score number
 	var current_score = label.get_text().substr(8, len(label.get_text()))
 	label.score += 100

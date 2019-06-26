@@ -18,10 +18,9 @@ func _ready():
 	create_keyword()
 	next_keyword()
 
-
 func create_keyword():
 	var total_keyword = get_parent().total_keyword
-	var possible_keyword = get_parent().get_keyword()
+	var possible_keyword = get_parent().keywords
 	# An array for checking keyword already used or not, [name][is_used]
 	var temp_keyword = []
 	for i in possible_keyword.size():

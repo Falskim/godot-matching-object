@@ -16,8 +16,7 @@ signal game_end
 func _ready():
 	label = get_node("time_remaining")
 	label.set_text("")
-	wait_time = get_parent().get_parent().keyword_time
-	start()
+	wait_time = get_parent().get_parent().key_timer
 	keyword = get_parent()
 	prepare_countdown_timer()
 
@@ -27,7 +26,8 @@ func update_label():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	update_label()
+	if !is_stopped():
+		update_label()
 	if time == 3 and !countdown_played:
 		countdown_timer.start()
 		countdown_played = true

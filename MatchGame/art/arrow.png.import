@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rounded_rectangle.png-85d367f454503d2c7ef7872dbb951bd7.stex"
+path="res://.import/arrow.png-e046ecea8e863a03c4e945417930d287.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://MatchGame/art/rounded_rectangle.png"
-dest_files=[ "res://.import/rounded_rectangle.png-85d367f454503d2c7ef7872dbb951bd7.stex" ]
+source_file="res://MatchGame/art/arrow.png"
+dest_files=[ "res://.import/arrow.png-e046ecea8e863a03c4e945417930d287.stex" ]
 
 [params]
 

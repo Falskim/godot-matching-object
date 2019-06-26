@@ -1,6 +1,72 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://MatchGame/art/tutorial.png" type="Texture" id=1]
+[ext_resource path="res://MatchGame/font/keyword.tres" type="DynamicFont" id=2]
+[ext_resource path="res://MatchGame/art/arrow.png" type="Texture" id=3]
+[ext_resource path="res://MatchGame/art/tutorial_text_container.png" type="Texture" id=4]
+[ext_resource path="res://MatchGame/font/tutorial.tres" type="DynamicFont" id=5]
+[ext_resource path="res://MatchGame/art/play_button.png" type="Texture" id=6]
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Node2D
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	$AnimationPlayer.play(\"New Anim\")
+	pass # Replace with function body.
+"
+
+[sub_resource type="Animation" id=1]
+resource_name = "New Anim"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 294.687, 504.962 ), Vector2( 294.687, 557.719 ), Vector2( 294.687, 504.962 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "New Anim"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 251.121, 503.455 ), Vector2( 207.408, 503.455 ), Vector2( 251.121, 503.455 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "New Anim"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 241.926, 503.455 ), Vector2( 204.243, 504.962 ), Vector2( 241.926, 503.455 ) ]
+}
 
 [node name="tutorial" type="Node2D"]
 
@@ -8,10 +74,110 @@
 margin_right = 576.0
 margin_bottom = 1024.0
 color = Color( 0.12549, 0.12549, 0.12549, 0.972549 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="tutorial_image" type="TextureRect" parent="."]
 margin_left = 85.5966
-margin_top = 234.132
+margin_top = 261.397
 margin_right = 499.597
-margin_bottom = 835.132
+margin_bottom = 862.397
 texture = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="tutorial_title2" type="Label" parent="tutorial_image"]
+margin_left = 146.186
+margin_top = -43.2365
+margin_right = 333.186
+margin_bottom = -8.23648
+rect_pivot_offset = Vector2( -38.9417, 158.751 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.262745, 0.952941, 0.921569, 1 )
+text = "Example"
+
+[node name="arrow" type="Node2D" parent="tutorial_image"]
+position = Vector2( -85.5966, -261.397 )
+script = SubResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="tutorial_image/arrow"]
+position = Vector2( 294.687, 504.962 )
+scale = Vector2( 1.03277, 1.06554 )
+texture = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="tutorial_image/arrow"]
+"anims/New Anim" = SubResource( 1 )
+
+[node name="arrow2" type="Node2D" parent="tutorial_image"]
+position = Vector2( -97.6554, -104.633 )
+script = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="tutorial_image/arrow2"]
+position = Vector2( 241.926, 503.455 )
+rotation = 4.71239
+scale = Vector2( 1.03277, 1.06554 )
+texture = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="tutorial_image/arrow2"]
+"anims/New Anim" = SubResource( 3 )
+
+[node name="arrow3" type="Node2D" parent="tutorial_image"]
+position = Vector2( -37.3615, 2.38885 )
+script = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="tutorial_image/arrow3"]
+position = Vector2( 241.926, 503.455 )
+rotation = 4.71239
+scale = Vector2( 1.03277, 1.06554 )
+texture = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="tutorial_image/arrow3"]
+"anims/New Anim" = SubResource( 4 )
+
+[node name="text_container" type="TextureRect" parent="."]
+margin_left = 14.0475
+margin_top = 6.24681
+margin_right = 556.047
+margin_bottom = 260.247
+rect_scale = Vector2( 1, 0.8 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="tutorial_title" type="Label" parent="text_container"]
+margin_left = 174.894
+margin_top = 20.94
+margin_right = 361.894
+margin_bottom = 55.94
+rect_pivot_offset = Vector2( -38.9417, 158.751 )
+custom_fonts/font = ExtResource( 2 )
+text = "How To Play"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="tutorial_content" type="Label" parent="text_container"]
+margin_left = -79.407
+margin_top = 117.703
+margin_right = 622.593
+margin_bottom = 200.703
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Pick the right object as much 
+as you can before times up"
+align = 1
+
+[node name="play_button" type="Button" parent="."]
+margin_left = 202.317
+margin_top = 887.861
+margin_right = 726.317
+margin_bottom = 1277.86
+rect_scale = Vector2( 0.35, 0.25 )
+icon = ExtResource( 6 )
+flat = true

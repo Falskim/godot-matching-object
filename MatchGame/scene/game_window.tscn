@@ -1,27 +1,90 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://MatchGame/art/backGround.png" type="Texture" id=1]
 [ext_resource path="res://MatchGame/art/Top UI.png" type="Texture" id=2]
 [ext_resource path="res://MatchGame/font/score.tres" type="DynamicFont" id=3]
 [ext_resource path="res://MatchGame/script/score_label.gd" type="Script" id=4]
-[ext_resource path="res://MatchGame/script/game.gd" type="Script" id=5]
-[ext_resource path="res://MatchGame/script/grid.gd" type="Script" id=6]
-[ext_resource path="res://MatchGame/script/wrong_timer.gd" type="Script" id=7]
-[ext_resource path="res://MatchGame/font/wrong.tres" type="DynamicFont" id=8]
-[ext_resource path="res://MatchGame/script/correct_timer.gd" type="Script" id=9]
-[ext_resource path="res://MatchGame/font/correct.tres" type="DynamicFont" id=10]
-[ext_resource path="res://MatchGame/font/keyword.tres" type="DynamicFont" id=11]
-[ext_resource path="res://MatchGame/script/keyword.gd" type="Script" id=12]
-[ext_resource path="res://MatchGame/script/keyword_timer.gd" type="Script" id=13]
-[ext_resource path="res://MatchGame/font/timer.tres" type="DynamicFont" id=14]
-[ext_resource path="res://MatchGame/sounds/countdown_timer.ogg" type="AudioStream" id=15]
-[ext_resource path="res://MatchGame/sounds/countdown_end.ogg" type="AudioStream" id=16]
-[ext_resource path="res://MatchGame/sounds/wrong.ogg" type="AudioStream" id=17]
-[ext_resource path="res://MatchGame/sounds/correct.ogg" type="AudioStream" id=18]
-[ext_resource path="res://MatchGame/sounds/bgm.ogg" type="AudioStream" id=19]
-[ext_resource path="res://MatchGame/scene/tutorial.tscn" type="PackedScene" id=20]
+[ext_resource path="res://MatchGame/script/grid.gd" type="Script" id=5]
+[ext_resource path="res://MatchGame/script/wrong_timer.gd" type="Script" id=6]
+[ext_resource path="res://MatchGame/font/wrong.tres" type="DynamicFont" id=7]
+[ext_resource path="res://MatchGame/script/correct_timer.gd" type="Script" id=8]
+[ext_resource path="res://MatchGame/font/correct.tres" type="DynamicFont" id=9]
+[ext_resource path="res://MatchGame/font/keyword.tres" type="DynamicFont" id=10]
+[ext_resource path="res://MatchGame/script/keyword.gd" type="Script" id=11]
+[ext_resource path="res://MatchGame/script/keyword_timer.gd" type="Script" id=12]
+[ext_resource path="res://MatchGame/font/timer.tres" type="DynamicFont" id=13]
+[ext_resource path="res://MatchGame/sounds/countdown_timer.ogg" type="AudioStream" id=14]
+[ext_resource path="res://MatchGame/sounds/countdown_end.ogg" type="AudioStream" id=15]
+[ext_resource path="res://MatchGame/sounds/wrong.ogg" type="AudioStream" id=16]
+[ext_resource path="res://MatchGame/sounds/correct.ogg" type="AudioStream" id=17]
+[ext_resource path="res://MatchGame/sounds/bgm.ogg" type="AudioStream" id=18]
+[ext_resource path="res://MatchGame/scene/tutorial.tscn" type="PackedScene" id=19]
+[ext_resource path="res://MatchGame/scene/play_button.gd" type="Script" id=20]
 
-[node name="game_window" type="Node2D"]
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+# List of shapes, will used as keyword
+# resource scene naming MUST BE SAME as keyword below
+# but replace space/blank/\" \" to an underscroll \"_\"
+# Example :
+# Keyword -> equilateral triangle
+# Scene naming -> equilateral_triangle OR preload(\"res://MatchGame/scene/tile/equilateral_triangle.tscn\"),
+
+var keywords = [
+\"equilateral triangle\",
+\"isosceles triangle\",
+\"kite\",
+\"right triangle\",
+\"rhombus\",
+\"scaleless triangle\",
+\"ellipse\",
+\"parallelogram\",
+\"diamond\",
+\"semi circle\",
+\"crescent\",
+\"star\",
+\"heart\",
+#\"triangle\",
+\"trapezoid\",
+\"octagon\",
+\"heptagon\",
+\"hexagon\",
+\"pentagon\",
+\"rectangle\",
+\"square\",
+\"circle\"
+]
+
+export (int) var total_keyword = 10
+export (int) var key_timer = 5
+
+# Type game that will used
+var game_type = \"shape\"
+
+func _ready():
+	get_resource_path()
+	play_music()
+
+func get_resource_path():
+	var res = []
+	for i in keywords.size():
+		res.append([])
+		var key = str(keywords[i]).replace(\" \", \"_\")
+		res[i] = \"res://MatchGame/scene/\" + game_type + \"/\" + key + \".tscn\"
+	return res
+
+func play_music():
+	$bgm.play()
+
+func _on_play_button_pressed():
+	$keyword/keyword_timer.start()
+	$tutorial.queue_free()
+"
+
+[node name="game_controller" type="Node2D"]
+script = SubResource( 1 )
+total_keyword = 6
 
 [node name="background" type="TextureRect" parent="."]
 margin_right = 576.0
@@ -71,102 +134,103 @@ custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "0"
 script = ExtResource( 4 )
 
-[node name="game_controller" type="Node2D" parent="."]
+[node name="grid" type="Node2D" parent="."]
 position = Vector2( 23.8504, 2.65009 )
 script = ExtResource( 5 )
-total_keyword = 6
-keyword_time = 5
-
-[node name="grid" type="Node2D" parent="game_controller"]
-script = ExtResource( 6 )
 width = 7
 height = 9
 x_start = 40
 y_start = 870
 offset = 75
 
-[node name="wrong_timer" type="Timer" parent="game_controller/grid"]
-script = ExtResource( 7 )
+[node name="wrong_timer" type="Timer" parent="grid"]
+script = ExtResource( 6 )
 
-[node name="wrong_message" type="Label" parent="game_controller/grid/wrong_timer"]
+[node name="wrong_message" type="Label" parent="grid/wrong_timer"]
 margin_left = 414.057
 margin_top = 173.882
 margin_right = 535.057
 margin_bottom = 213.882
 grow_horizontal = 2
-custom_fonts/font = ExtResource( 8 )
+custom_fonts/font = ExtResource( 7 )
 custom_colors/font_color = Color( 1, 0.172549, 0, 1 )
 text = "Wrong"
 align = 1
 
-[node name="correct_timer" type="Timer" parent="game_controller/grid"]
-script = ExtResource( 9 )
+[node name="correct_timer" type="Timer" parent="grid"]
+script = ExtResource( 8 )
 
-[node name="correct_message" type="Label" parent="game_controller/grid/correct_timer"]
+[node name="correct_message" type="Label" parent="grid/correct_timer"]
 margin_left = 49.5969
 margin_top = 174.246
 margin_right = 166.597
 margin_bottom = 210.246
 grow_horizontal = 2
-custom_fonts/font = ExtResource( 10 )
+custom_fonts/font = ExtResource( 9 )
 custom_colors/font_color = Color( 0, 0.996078, 0.180392, 1 )
 text = "Correct"
 align = 1
 
-[node name="keyword" type="Label" parent="game_controller"]
-margin_left = 169.277
-margin_top = 106.203
-margin_right = 385.277
-margin_bottom = 166.203
+[node name="keyword" type="Label" parent="."]
+margin_left = 193.128
+margin_top = 108.853
+margin_right = 409.128
+margin_bottom = 168.853
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 11 )
+custom_fonts/font = ExtResource( 10 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Keyword"
 align = 1
+script = ExtResource( 11 )
+
+[node name="keyword_timer" type="Timer" parent="keyword"]
+wait_time = 10.0
 script = ExtResource( 12 )
 
-[node name="keyword_timer" type="Timer" parent="game_controller/keyword"]
-wait_time = 10.0
-script = ExtResource( 13 )
-
-[node name="time_remaining" type="Label" parent="game_controller/keyword/keyword_timer"]
+[node name="time_remaining" type="Label" parent="keyword/keyword_timer"]
 margin_left = 264.83
 margin_top = 176.154
 margin_right = 327.83
 margin_bottom = 212.154
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 14 )
+custom_fonts/font = ExtResource( 13 )
 custom_colors/font_color = Color( 0.0745098, 0.964706, 0.313726, 1 )
-text = "0.00"
 align = 1
 
-[node name="countdown_sound" type="AudioStreamPlayer" parent="game_controller/keyword/keyword_timer"]
+[node name="countdown_sound" type="AudioStreamPlayer" parent="keyword/keyword_timer"]
+stream = ExtResource( 14 )
+
+[node name="countdown_end_sound" type="AudioStreamPlayer" parent="keyword/keyword_timer"]
 stream = ExtResource( 15 )
 
-[node name="countdown_end_sound" type="AudioStreamPlayer" parent="game_controller/keyword/keyword_timer"]
+[node name="wrong_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 16 )
 
-[node name="wrong_sound" type="AudioStreamPlayer" parent="."]
+[node name="correct_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 17 )
 
-[node name="correct_sound" type="AudioStreamPlayer" parent="."]
+[node name="bgm" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 18 )
 
-[node name="bgm" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 19 )
+[node name="tutorial" parent="." instance=ExtResource( 19 )]
 
-[node name="tutorial" parent="." instance=ExtResource( 20 )]
-visible = false
-[connection signal="correct_keyword" from="game_controller/grid" to="game_controller/grid/correct_timer" method="_on_grid_correct_keyword"]
-[connection signal="wrong_keyword" from="game_controller/grid" to="game_controller/grid/wrong_timer" method="_on_grid_wrong_keyword"]
-[connection signal="timeout" from="game_controller/grid/wrong_timer" to="game_controller/grid" method="_on_wrong_timer_timeout"]
-[connection signal="timeout" from="game_controller/grid/wrong_timer" to="game_controller/grid/wrong_timer" method="_on_wrong_timer_timeout"]
-[connection signal="timeout" from="game_controller/grid/correct_timer" to="game_controller/grid/correct_timer" method="_on_correct_timer_timeout"]
-[connection signal="game_end" from="game_controller/keyword/keyword_timer" to="game_controller/grid" method="_on_keyword_timer_game_end"]
-[connection signal="timeout" from="game_controller/keyword/keyword_timer" to="game_controller/keyword/keyword_timer" method="_on_keyword_timer_timeout"]
+[node name="tutorial_content" parent="tutorial/text_container" index="1"]
+margin_left = -74.2164
+margin_right = 627.784
+
+[node name="play_button" parent="tutorial" index="3"]
+script = ExtResource( 20 )
+[connection signal="correct_keyword" from="grid" to="grid/correct_timer" method="_on_grid_correct_keyword"]
+[connection signal="wrong_keyword" from="grid" to="grid/wrong_timer" method="_on_grid_wrong_keyword"]
+[connection signal="timeout" from="grid/wrong_timer" to="grid" method="_on_wrong_timer_timeout"]
+[connection signal="timeout" from="grid/wrong_timer" to="grid/wrong_timer" method="_on_wrong_timer_timeout"]
+[connection signal="timeout" from="grid/correct_timer" to="grid/correct_timer" method="_on_correct_timer_timeout"]
+[connection signal="game_end" from="keyword/keyword_timer" to="grid" method="_on_keyword_timer_game_end"]
+[connection signal="timeout" from="keyword/keyword_timer" to="keyword/keyword_timer" method="_on_keyword_timer_timeout"]
+[connection signal="pressed" from="tutorial/play_button" to="." method="_on_play_button_pressed"]
 
 [editable path="tutorial"]
