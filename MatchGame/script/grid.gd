@@ -24,11 +24,13 @@ var is_allow_input = true
 # Signal if answer is correct
 signal correct_keyword
 
+var game_end = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
-	prepare_tiles_resources()
-	prepare_tiles_grid()
+	tiles_resources = prepare_tiles_resources()
+	all_tiles = prepare_tiles_grid()
 	spawn_tile()
 
 func prepare_tiles_resources():
@@ -37,7 +39,7 @@ func prepare_tiles_resources():
 	for i in path.size():
 		resource.append([])
 		resource[i] = load(path[i])
-	tiles_resources = resource
+	return resource
 	
 func prepare_tiles_grid():
 	var array = []
@@ -45,7 +47,7 @@ func prepare_tiles_grid():
 		array.append([])
 		for j in height:
 			array[i].append(null)
-	all_tiles = array
+	return array
 
 func spawn_tile():
 	var tile 
@@ -61,7 +63,7 @@ func spawn_tile():
 			var loop_counter = 0
 			var rand = floor(rand_range(0, tiles_resources.size()))
 			tile = tiles_resources[rand].instance()
-			while (object_amount[rand] > threshold or has_adjacent(tile.name, i, j)) and loop_counter < 100:
+			while (object_amount[rand] > threshold or has_name_adjacent(tile.names, i, j)) and loop_counter < 100:
 				rand = floor(rand_range(0, tiles_resources.size()))
 				tile = tiles_resources[rand].instance()
 				loop_counter += 1
@@ -70,6 +72,8 @@ func spawn_tile():
 			add_child(tile)
 			tile.position = grid_to_pixel(i, j)
 			all_tiles[i][j] = tile
+			while has_color_adjacent(i, j):
+				tile.randomize_color()
 	# Checking if certain object doenst appear
 	var total = 0
 	for i in tiles_resources.size():
@@ -87,14 +91,24 @@ func spawn_tile():
 	print(object_amount)
 	print(total)
 
-func has_adjacent(name, i, j):
+func has_name_adjacent(name, i, j):
 	if i > 0:
 		if all_tiles[i-1][j] != null && all_tiles[i-1][j].names == name:
-				return true
+			return true
 	if j > 0:
 		if all_tiles[i][j-1] != null && all_tiles[i][j-1].names == name:
 			return true
 	return false	
+
+func has_color_adjacent(i, j):
+	var tile = all_tiles[i][j]
+	if i > 0:
+		if all_tiles[i-1][j] != null && all_tiles[i-1][j].color == tile.color:
+			return true
+	if j > 0:
+		if all_tiles[i][j-1] != null && all_tiles[i][j-1].color == tile.color:
+			return true
+	return false
 
 func grid_to_pixel(column, row):
 	var new_x = x_start + (offset * column)
@@ -186,10 +200,12 @@ func update_score():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	input_register()
+	if !game_end:
+		input_register()
 
 func _on_wrong_timer_timeout():
 	is_allow_input = true
 
 func _on_keyword_timer_game_end():
 	is_allow_input = false
+	game_end = true

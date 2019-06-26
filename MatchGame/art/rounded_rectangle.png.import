@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Green Adjacent.png-121ebe6c47e84739c186bf5bcfd9a79f.stex"
+path="res://.import/rounded_rectangle.png-85d367f454503d2c7ef7872dbb951bd7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://MatchGame/art/shape/Green Adjacent.png"
-dest_files=[ "res://.import/Green Adjacent.png-121ebe6c47e84739c186bf5bcfd9a79f.stex" ]
+source_file="res://MatchGame/art/rounded_rectangle.png"
+dest_files=[ "res://.import/rounded_rectangle.png-85d367f454503d2c7ef7872dbb951bd7.stex" ]
 
 [params]
 

@@ -14,9 +14,10 @@ signal game_end
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	label = get_node("time_remaining")
+	label.set_text("")
 	wait_time = get_parent().get_parent().keyword_time
 	start()
-	label = get_node("time_remaining")
 	keyword = get_parent()
 	prepare_countdown_timer()
 

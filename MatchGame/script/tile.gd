@@ -2,6 +2,8 @@ extends Node2D
 
 export (String) var names
 
+var color
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize_color()
@@ -15,7 +17,8 @@ func randomize_color():
 		r = round(rand_range(0, 1))
 		g = round(rand_range(0, 1))
 		b = round(rand_range(0, 1))
-	$Sprite.modulate = Color(r,g,b)	
+	color = Color(r, g, b)
+	$Sprite.modulate = color
 #	var rand = floor(rand_range(0, possible_modulate_color.size()))
 #	$Sprite.modulate = Color(
 #	possible_modulate_color[rand][0],
