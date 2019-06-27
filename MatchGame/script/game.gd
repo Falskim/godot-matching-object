@@ -36,7 +36,8 @@ func _ready():
 	play_music()
 	get_resource()
 	if !$tutorial.is_visible():
-		start_game()
+		#start_game()
+		start_game_countdown()
 
 func get_resource():
 	var texture = get_texture_resource()
@@ -64,7 +65,15 @@ func stop_music():
 func start_game():
 	$grid.allow_input = true
 	$keyword/keyword_timer.start()
-	$tutorial.queue_free()
+	$keyword.next_keyword()
+	$start_game.queue_free()
+
+func start_game_countdown():
+	$countdown.start_game_countdown()
 
 func _on_tutorial_end_tutorial():
+	start_game_countdown()
+	$tutorial.queue_free()
+
+func _on_countdown_start_game():
 	start_game()

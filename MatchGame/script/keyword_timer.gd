@@ -11,6 +11,7 @@ var countdown_counter = 0
 
 # Signal to end the game if all of keywords already used
 signal game_end
+signal start_countdown
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,7 +19,6 @@ func _ready():
 	label.set_text("")
 	wait_time = get_parent().get_parent().key_timer
 	keyword = get_parent()
-	prepare_countdown_timer()
 
 func update_label():
 	time = int(str(time_left).substr(0, 1))
@@ -29,18 +29,10 @@ func _process(delta):
 	if !is_stopped():
 		update_label()
 	if time == 3 and !countdown_played:
-		countdown_timer.start()
 		countdown_played = true
-
-func prepare_countdown_timer():
-	countdown_timer = Timer.new()
-	add_child(countdown_timer)
-	countdown_timer.connect("timeout", self, "_on_Timer_countdown")
-	countdown_timer.set_wait_time(1.0)
-	countdown_timer.set_one_shot(false)
+		emit_signal("start_countdown")
 
 func _on_keyword_timer_timeout():
-	$countdown_end_sound.play()
 	if keyword.has_next_keyword():
 		keyword.next_keyword()
 		start()
@@ -51,10 +43,5 @@ func _on_keyword_timer_timeout():
 		emit_signal("game_end")
 		queue_free()
 
-func _on_Timer_countdown():
-	$countdown_sound.play()
-	countdown_counter += 1
-	if countdown_counter == 3:
-		countdown_timer.stop()
-		countdown_counter = 0
-		countdown_played = false
+func _on_countdown_countdown_end():
+	countdown_played = false

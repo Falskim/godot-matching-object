@@ -13,7 +13,6 @@ var current_keyword
 func _ready():
 	randomize()
 	_create_keyword()
-	next_keyword()
 
 func _create_keyword():
 	var total_keyword = get_parent().total_keyword
