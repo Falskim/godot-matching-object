@@ -6,52 +6,57 @@ export (int) var height
 export (int) var x_start
 export (int) var y_start
 export (int) var offset
-
-# Debug and developing status
 export (bool) var debug = true
 
 # Load all resource
-var tiles_resources = []
 var explosion_effect = load("res://MatchGame/scene/explosion_effect.tscn")
+var tile_path = load("res://MatchGame/scene/tile.tscn")
+var keywod_sprite_resources = []
 
 # All tiles on the grid
 var all_tiles = []
 
-# Signal if answer is wrong
+# Signal
 signal wrong_keyword
-var is_allow_input = true
-
-# Signal if answer is correct
 signal correct_keyword
 
+# Game status condition
+var input_position
+var allow_input = false
 var game_end = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
-	tiles_resources = prepare_tiles_resources()
-	all_tiles = prepare_tiles_grid()
-	spawn_tile()
+	_prepare_tiles_resource()
+	_prepare_tiles_grid()
+	_spawn_tile()
 
-func prepare_tiles_resources():
-	var path = get_parent().get_resource_path()
-	var resource = []
-	for i in path.size():
-		resource.append([])
-		resource[i] = load(path[i])
-	return resource
-	
-func prepare_tiles_grid():
+func _prepare_tiles_resource():
+	keywod_sprite_resources = get_parent().get_resource()
+
+func _prepare_tiles_grid():
 	var array = []
 	for i in width:
 		array.append([])
 		for j in height:
 			array[i].append(null)
-	return array
+	all_tiles = array
 
-func spawn_tile():
-	var tile 
-	var total_object = tiles_resources.size()
+func _set_tile_detail(i, j, value):
+	# Keyword names
+	all_tiles[i][j].names = keywod_sprite_resources[value][0]
+	# Sprite Texture
+	all_tiles[i][j].set_sprite(keywod_sprite_resources[value][1])
+	# Position
+	all_tiles[i][j].position = grid_to_pixel(i, j)
+	# Color
+	all_tiles[i][j].randomize_color()
+	
+func _spawn_tile():
+	var tile_res = load("res://MatchGame/scene/tile.tscn")
+	var tile
+	var total_object = keywod_sprite_resources.size()
 	var object_amount = []
 	for i in total_object:
 		object_amount.append([])
@@ -61,36 +66,31 @@ func spawn_tile():
 	for i in width:
 		for j in height:
 			var loop_counter = 0
-			var rand = floor(rand_range(0, tiles_resources.size()))
-			tile = tiles_resources[rand].instance()
+			var rand = floor(rand_range(0, keywod_sprite_resources.size()))
+			tile = tile_res.instance()
+			add_child(tile)
+			all_tiles[i][j] = tile
+			_set_tile_detail(i, j, rand)
 			while (object_amount[rand] > threshold or has_name_adjacent(tile.names, i, j)) and loop_counter < 100:
-				rand = floor(rand_range(0, tiles_resources.size()))
-				tile = tiles_resources[rand].instance()
+				rand = floor(rand_range(0, keywod_sprite_resources.size()))
+				_set_tile_detail(i, j, rand)
 				loop_counter += 1
 			object_amount[rand] += 1
-			tile = tiles_resources[rand].instance()
-			add_child(tile)
-			tile.position = grid_to_pixel(i, j)
-			all_tiles[i][j] = tile
 			while has_color_adjacent(i, j):
 				tile.randomize_color()
-	# Checking if certain object doenst appear
+	# Checking if certain object doesn't appear
 	var total = 0
-	for i in tiles_resources.size():
+	for i in keywod_sprite_resources.size():
 		if object_amount[i] < threshold*2/3:
 			var x = floor(rand_range(0, width))
 			var y = floor(rand_range(0, height))
-			tile = tiles_resources[i].instance()
-			remove_child(all_tiles[x][y])
-			add_child(tile)
-			tile.position = grid_to_pixel(x, y)
-			all_tiles[x][y] = tile
+			_set_tile_detail(x, y, i)
 			object_amount[i] += 1
 		total += object_amount[i]
 	print("Tile Object Distribution : ")
 	print(object_amount)
 	print(total)
-
+	
 func has_name_adjacent(name, i, j):
 	if i > 0:
 		if all_tiles[i-1][j] != null && all_tiles[i-1][j].names == name:
@@ -128,42 +128,29 @@ func pixel_to_grid(input_position):
 		row = 0
 	return Vector2(column, row)
 
-func is_in_grid(grid_position):
-	var column = grid_position.x
-	var row = grid_position.y
+func input_register():
+	if Input.is_action_just_pressed("ui_touch") and allow_input:
+		input_position = pixel_to_grid(get_global_mouse_position())
+		print("Clicked !")
+		if is_in_grid():
+			check_tile()
+			# Debug
+			if debug:
+				print(input_position)
+
+func is_in_grid():
+	var column = input_position.x
+	var row = input_position.y
 	if column < 0 or column >= width or row < 0 or row >= height:
-		print("Out off bound !")
 		return false
 	return true
 
-func is_already_clicked(grid_position):
-	return all_tiles[grid_position.x][grid_position.y] == null
-	
-func input_register():
-	if Input.is_action_just_pressed("ui_touch") and is_allow_input:
-		var curr_position = pixel_to_grid(get_global_mouse_position())
-		print("Clicked !")
-		if is_in_grid(curr_position) and !is_already_clicked(curr_position):
-			check_tile(curr_position)
-			# Debug
-			if debug:
-				print(curr_position)
-
-func check_tile(input_position):
+func check_tile():
 	var choosen_keyword = all_tiles[input_position.x][input_position.y].names
 	if is_keyword_same(choosen_keyword):
-		play_sound_effect("correct_sound")
-		destroy_tile(input_position)
-		start_effect(explosion_effect, input_position.x, input_position.y)
-		respawn_tile(input_position)
-		emit_signal("correct_keyword")
+		correct_answer()
 	else:
-		play_sound_effect("wrong_sound")
-		emit_signal("wrong_keyword")
-		is_allow_input = false
-
-func play_sound_effect(effect):
-	get_parent().get_node(effect).play()
+		wrong_answer()
 
 func is_keyword_same(chosen_keyword):
 	var label_keyword = get_parent().get_node("keyword").get_keyword()
@@ -174,32 +161,29 @@ func is_keyword_same(chosen_keyword):
 		print("Label keyword : " + label_keyword)
 		print("Result : " + str(result))
 	return result
+	
+func correct_answer():
+	play_sound_effect("correct_sound")
+	start_effect(explosion_effect, input_position)
+	change_tile(input_position)
+	emit_signal("correct_keyword")
 
-func destroy_tile(tile_position):
-	var tile = all_tiles[tile_position.x][tile_position.y]
-	all_tiles[tile_position.x][tile_position.y] = null
-	print(tile)
-	update_score()
-	remove_child(tile)
+func wrong_answer():
+	play_sound_effect("wrong_sound")
+	emit_signal("wrong_keyword")
+	allow_input = false
 
-func start_effect(effect, column, row):
+func play_sound_effect(effect):
+	get_parent().get_node(effect).play()
+
+func change_tile(_position):
+	var rand = floor(rand_range(0, keywod_sprite_resources.size()))
+	_set_tile_detail(_position.x, _position.y, rand)
+
+func start_effect(effect, _position):
 	var fx = effect.instance()
 	add_child(fx)
-	fx.position = grid_to_pixel(column, row)
-
-func respawn_tile(tile_position):
-	var rand = floor(rand_range(0, tiles_resources.size()))
-	var tile = tiles_resources[rand].instance()
-	add_child(tile)
-	tile.position = grid_to_pixel(tile_position.x, tile_position.y)
-	all_tiles[tile_position.x][tile_position.y] = tile
-
-func update_score():
-	var label = get_parent().get_node("score")
-	# Getting current score number
-	var current_score = label.get_text().substr(8, len(label.get_text()))
-	label.score += 100
-	label.update()
+	fx.position = grid_to_pixel(_position.x, _position.y)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -207,8 +191,8 @@ func _process(delta):
 		input_register()
 
 func _on_wrong_timer_timeout():
-	is_allow_input = true
+	allow_input = true
 
 func _on_keyword_timer_game_end():
-	is_allow_input = false
+	allow_input = false
 	game_end = true

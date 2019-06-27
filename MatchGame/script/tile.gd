@@ -1,12 +1,7 @@
 extends Node2D
 
 export (String) var names
-
 var color
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	randomize_color()
 
 func randomize_color():
 	randomize()
@@ -19,13 +14,6 @@ func randomize_color():
 		b = round(rand_range(0, 1))
 	color = Color(r, g, b)
 	$Sprite.modulate = color
-#	var rand = floor(rand_range(0, possible_modulate_color.size()))
-#	$Sprite.modulate = Color(
-#	possible_modulate_color[rand][0],
-#	possible_modulate_color[rand][1],
-#	possible_modulate_color[rand][2]
-#	)
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+
+func set_sprite(texture):
+	$Sprite.set_texture(load(texture))

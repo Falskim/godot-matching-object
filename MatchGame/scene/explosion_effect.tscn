@@ -1,13 +1,16 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://MatchGame/script/Explosion Effect.gd" type="Script" id=1]
-[ext_resource path="res://MatchGame/art/explosion/explode_1_1.png" type="Texture" id=2]
-[ext_resource path="res://MatchGame/art/explosion/explode_2_1.png" type="Texture" id=3]
-[ext_resource path="res://MatchGame/art/explosion/explode_3_1.png" type="Texture" id=4]
-[ext_resource path="res://MatchGame/art/explosion/explode_4_1.png" type="Texture" id=5]
-[ext_resource path="res://MatchGame/art/explosion/explode_5_1.png" type="Texture" id=6]
-[ext_resource path="res://MatchGame/art/explosion/explode_6_1.png" type="Texture" id=7]
-[ext_resource path="res://MatchGame/art/explosion/explode_7.png" type="Texture" id=8]
+[ext_resource path="res://MatchGame/script/explosion_effect.gd" type="Script" id=1]
+[ext_resource path="res://MatchGame/images/explosion/explode_1_1.png" type="Texture" id=2]
+[ext_resource path="res://MatchGame/images/explosion/explode_2_1.png" type="Texture" id=3]
+[ext_resource path="res://MatchGame/images/explosion/explode_3_1.png" type="Texture" id=4]
+[ext_resource path="res://MatchGame/images/explosion/explode_4_1.png" type="Texture" id=5]
+[ext_resource path="res://MatchGame/images/explosion/explode_5_1.png" type="Texture" id=6]
+[ext_resource path="res://MatchGame/images/explosion/explode_6_1.png" type="Texture" id=7]
+[ext_resource path="res://MatchGame/images/explosion/explode_7.png" type="Texture" id=8]
+
+
+
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {

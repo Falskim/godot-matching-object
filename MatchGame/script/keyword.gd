@@ -3,9 +3,6 @@ extends Label
 var total_keyword
 export (bool) var debug = true
 
-# Possible Keyword
-
-# Shape
 # List keyword queue that will used
 var keywords = []
 
@@ -15,10 +12,10 @@ var current_keyword
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
-	create_keyword()
+	_create_keyword()
 	next_keyword()
 
-func create_keyword():
+func _create_keyword():
 	var total_keyword = get_parent().total_keyword
 	var possible_keyword = get_parent().keywords
 	# An array for checking keyword already used or not, [name][is_used]
@@ -57,25 +54,21 @@ func next_keyword():
 		current_keyword = keywords[0]
 	else:
 		if has_next_keyword():
-			current_keyword = keywords[get_current_keyword_index() + 1]
+			current_keyword = keywords[_get_current_keyword_index() + 1]
 	# Updating keyword
-	update_label()
+	_update_label()
 
 func has_next_keyword():
-	return get_current_keyword_index() < keywords.size() - 1
+	return _get_current_keyword_index() < keywords.size() - 1
 
-func update_label():
+func _update_label():
 	var text_string = current_keyword
 	set_text(str(text_string).to_upper())
 
-func get_current_keyword_index():
+func _get_current_keyword_index():
 	for i in keywords.size():
 		if keywords[i] == current_keyword:
 			return i
 
 func get_keyword():
 	return current_keyword
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass

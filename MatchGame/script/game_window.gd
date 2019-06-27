@@ -1,11 +1,11 @@
 extends Node2D
 
-# Game Variabel
-export (int) var total_keyword = 10
-export (int) var key_timer = 5
-
-# Type game that will used
-export (String)var game_type = "shape"
+# List of shapes, will used as keyword
+# resource scene naming MUST BE SAME as keyword below
+# but replace space/blank/" " to an underscroll "_"
+# Example :
+# Keyword -> equilateral triangle
+# Scene naming -> equilateral_triangle OR preload("res://MatchGame/scene/tile/equilateral_triangle.tscn"),
 
 var keywords = [
 "equilateral triangle",
@@ -32,8 +32,15 @@ var keywords = [
 "circle"
 ]
 
+# Game Variabel
+export (int) var total_keyword = 10
+export (int) var key_timer = 5
+
+# Type game that will used
+var game_type = "shape"
+
 func _ready():
-	play_music()
+	#play_music()
 	get_resource()
 	if !$tutorial.is_visible():
 		start_game()
@@ -57,9 +64,6 @@ func get_texture_resource():
 
 func play_music():
 	$bgm.play()
-
-func stop_music():
-	$bgm.stop()
 
 func start_game():
 	$grid.allow_input = true
