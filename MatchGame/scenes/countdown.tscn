@@ -1,8 +1,9 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://MatchGame/script/countdown.gd" type="Script" id=1]
+[ext_resource path="res://MatchGame/scripts/countdown.gd" type="Script" id=1]
 [ext_resource path="res://MatchGame/sounds/countdown_timer.ogg" type="AudioStream" id=2]
 [ext_resource path="res://MatchGame/sounds/countdown_end.ogg" type="AudioStream" id=3]
+
 
 [node name="countdown" type="Timer"]
 script = ExtResource( 1 )

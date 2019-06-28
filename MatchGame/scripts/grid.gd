@@ -10,22 +10,22 @@ export (bool) var debug = true
 
 # Load all resource
 onready var root = get_parent().get_parent()
-onready var explosion_effect = load("res://MatchGame/scene/explosion_effect.tscn")
-onready var tile_path = load("res://MatchGame/scene/tile.tscn")
+onready var explosion_effect = load("res://MatchGame/scenes/explosion_effect.tscn")
+onready var tile_path = load("res://MatchGame/scenes/tile.tscn")
 onready var keywod_sprite_resources = root.get_resource()
 
 # All tiles on the grid
-onready var all_tiles
 onready var is_grid_ready = false
+onready var all_tiles
 
 # Signal
 signal wrong_keyword
 signal correct_keyword
 
 # Game status condition
+onready var allow_input = false
+onready var game_end = false
 var input_position
-var allow_input = false
-var game_end = false
 
 func prepare_tiles_grid():
 	var array = []
@@ -47,7 +47,6 @@ func _set_tile_detail(i, j, value):
 	all_tiles[i][j].randomize_color()
 	
 func generate_tiles():
-	var tile_res = load("res://MatchGame/scene/tile.tscn")
 	var tile
 	var total_object = keywod_sprite_resources.size()
 	var object_amount = []
@@ -61,12 +60,11 @@ func generate_tiles():
 			var loop_counter = 0
 			var rand = floor(rand_range(0, keywod_sprite_resources.size()))
 			if all_tiles[i][j] == null:
-				tile = tile_res.instance()
+				tile = tile_path.instance()
 				add_child(tile)
 				all_tiles[i][j] = tile
 			else:
 				tile = all_tiles[i][j]
-				print("Changing " + str(i) + str(j))
 			_set_tile_detail(i, j, rand)
 			while (object_amount[rand] > threshold or has_name_adjacent(tile.names, i, j)) and loop_counter < 100:
 				rand = floor(rand_range(0, keywod_sprite_resources.size()))
@@ -126,9 +124,8 @@ func pixel_to_grid(input_position):
 	return Vector2(column, row)
 
 func input_register():
-	if Input.is_action_just_pressed("ui_touch") and allow_input:
+	if Input.is_action_just_pressed("ui_touch"):
 		input_position = pixel_to_grid(get_global_mouse_position())
-		print("Clicked !")
 		if is_in_grid():
 			check_tile()
 			# Debug
@@ -184,7 +181,7 @@ func start_effect(effect, _position):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if !game_end:
+	if allow_input and !game_end:
 		input_register()
 
 func _on_wrong_timer_timeout():
@@ -193,3 +190,4 @@ func _on_wrong_timer_timeout():
 func _on_keyword_timer_game_end():
 	allow_input = false
 	game_end = true
+	print("input disabled")

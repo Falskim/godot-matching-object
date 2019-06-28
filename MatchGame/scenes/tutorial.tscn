@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://MatchGame/script/tutorial.gd" type="Script" id=1]
+[ext_resource path="res://MatchGame/scripts/tutorial.gd" type="Script" id=1]
 [ext_resource path="res://MatchGame/images/tutorial.png" type="Texture" id=2]
 [ext_resource path="res://MatchGame/fonts/keyword.tres" type="DynamicFont" id=3]
 [ext_resource path="res://MatchGame/images/arrow.png" type="Texture" id=4]
@@ -8,7 +8,9 @@
 [ext_resource path="res://MatchGame/fonts/Comfortaa-Regular.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://MatchGame/fonts/tutorial.tres" type="DynamicFont" id=7]
 [ext_resource path="res://MatchGame/images/play_button.png" type="Texture" id=8]
-[ext_resource path="res://MatchGame/scene/slide_out_down.tres" type="Animation" id=9]
+[ext_resource path="res://MatchGame/anims/slide_out_down.tres" type="Animation" id=9]
+
+
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D

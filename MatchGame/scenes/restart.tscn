@@ -1,11 +1,13 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://MatchGame/scene/restart.gd" type="Script" id=1]
+[ext_resource path="res://MatchGame/scripts/restart.gd" type="Script" id=1]
 [ext_resource path="res://MatchGame/images/container.png" type="Texture" id=2]
 [ext_resource path="res://MatchGame/fonts/Comfortaa-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://MatchGame/images/no.png" type="Texture" id=4]
 [ext_resource path="res://MatchGame/images/yes.png" type="Texture" id=5]
-[ext_resource path="res://MatchGame/scene/slide_in.tres" type="Animation" id=6]
+[ext_resource path="res://MatchGame/anims/slide_in.tres" type="Animation" id=6]
+
+
 
 [sub_resource type="DynamicFont" id=1]
 size = 50
@@ -13,7 +15,7 @@ outline_size = 5
 outline_color = Color( 0, 1, 1, 1 )
 font_data = ExtResource( 3 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "slide_out_right"
 length = 0.5
 tracks/0/type = "value"
@@ -69,6 +71,6 @@ icon = ExtResource( 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/slide_in_right = ExtResource( 6 )
-anims/slide_out_right = SubResource( 3 )
+anims/slide_out_right = SubResource( 2 )
 [connection signal="pressed" from="panel/HBoxContainer/no" to="." method="_on_no_pressed"]
 [connection signal="pressed" from="panel/HBoxContainer/yes" to="." method="_on_yes_pressed"]

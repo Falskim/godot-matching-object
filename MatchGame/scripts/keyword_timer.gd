@@ -2,6 +2,7 @@ extends Timer
 
 onready var keyword = get_parent()
 var time
+
 # Main game node
 onready var root = get_parent().get_parent().get_parent()
 
@@ -36,7 +37,6 @@ func _on_keyword_timer_timeout():
 	else:
 		stop()
 		$time_remaining.set_text("0")
-		set_process(false)
 		emit_signal("game_end")
 
 func _on_countdown_countdown_end():

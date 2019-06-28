@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Match Object"
-run/main_scene="res://MatchGame/scene/game_controller.tscn"
+run/main_scene="res://MatchGame/scenes/game_controller.tscn"
 config/icon="res://icon.png"
 
 [display]

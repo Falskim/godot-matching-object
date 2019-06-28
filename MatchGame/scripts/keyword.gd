@@ -4,7 +4,7 @@ onready var root = get_parent().get_parent()
 export (bool) var debug = true
 
 # List keyword queue that will used
-var keywords = []
+var keywords
 
 # Currently used keyword
 var current_keyword
@@ -22,6 +22,7 @@ func prepare_keyword():
 	# Avoiding if inputed total keyword exceeding total avaiable keyword
 	if total_keyword > possible_keyword.size():
 		total_keyword = possible_keyword.size()
+	keywords = []
 	for i in total_keyword:
 		var rand = floor(rand_range(0, possible_keyword.size()))
 		while temp_keyword[rand][1]:

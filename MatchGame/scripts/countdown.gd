@@ -10,10 +10,11 @@ func start_countdown():
 	start()
 
 func _on_countdown_timeout():
-	$countdown_sound.play()
 	counter += 1
 	if counter == counter_limit:
 		countdown_done()
+		return
+	$countdown_sound.play()
 
 func countdown_done():
 	stop()

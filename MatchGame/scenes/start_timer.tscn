@@ -1,8 +1,10 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://MatchGame/script/start_timer.gd" type="Script" id=1]
+[ext_resource path="res://MatchGame/scripts/start_timer.gd" type="Script" id=1]
 [ext_resource path="res://MatchGame/fonts/Comfortaa-Regular.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://MatchGame/scene/countdown.tscn" type="PackedScene" id=3]
+[ext_resource path="res://MatchGame/scenes/countdown.tscn" type="PackedScene" id=3]
+
+
 
 [sub_resource type="DynamicFont" id=1]
 size = 90
