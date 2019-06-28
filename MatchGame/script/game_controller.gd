@@ -36,7 +36,7 @@ func _ready():
 	play_music()
 	get_resource()
 	if !$tutorial.is_visible():
-		if $start_game.is_visible(): 
+		if $start_game.is_visible():
 			start_game_countdown()
 
 func get_resource():
@@ -63,9 +63,7 @@ func stop_music():
 	$bgm.stop()
 
 func start_game():
-	$game/grid.allow_input = true
-	$game/keyword/keyword_timer.start()
-	$game/keyword.next_keyword()
+	$game.start_game()
 
 func start_game_countdown():
 	$start_timer/time/countdown.start_countdown()
@@ -77,4 +75,3 @@ func _on_tutorial_end_tutorial():
 func _on_start_timer_end_start_timer():
 	start_game()
 	$start_timer.visible = false
-	

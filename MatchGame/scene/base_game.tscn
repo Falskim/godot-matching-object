@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://MatchGame/script/game_controller.gd" type="Script" id=1]
+[ext_resource path="res://MatchGame/images/backGround.png" type="Texture" id=2]
+[ext_resource path="res://MatchGame/scene/game.tscn" type="PackedScene" id=3]
+[ext_resource path="res://MatchGame/scene/start_timer.tscn" type="PackedScene" id=4]
+[ext_resource path="res://MatchGame/scene/tutorial.tscn" type="PackedScene" id=5]
+[ext_resource path="res://MatchGame/sounds/bgm.ogg" type="AudioStream" id=6]
+
+[node name="game_controller" type="Node2D"]
+script = ExtResource( 1 )
+total_keyword = 2
+
+[node name="background" type="TextureRect" parent="."]
+margin_right = 576.0
+margin_bottom = 1024.0
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="game" parent="." instance=ExtResource( 3 )]
+
+[node name="start_timer" parent="." instance=ExtResource( 4 )]
+editor/display_folded = true
+
+[node name="tutorial" parent="." instance=ExtResource( 5 )]
+editor/display_folded = true
+
+[node name="bgm" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 6 )
+[connection signal="end_start_timer" from="start_timer" to="start_timer" method="_on_start_timer_end_start_timer"]
+[connection signal="end_start_timer" from="start_timer" to="." method="_on_start_timer_end_start_timer"]
+[connection signal="end_tutorial" from="tutorial" to="." method="_on_tutorial_end_tutorial"]

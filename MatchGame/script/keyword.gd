@@ -1,6 +1,6 @@
 extends Label
 
-var total_keyword
+onready var root = get_parent().get_parent()
 export (bool) var debug = true
 
 # List keyword queue that will used
@@ -9,14 +9,9 @@ var keywords = []
 # Currently used keyword
 var current_keyword
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	randomize()
-	_create_keyword()
-
-func _create_keyword():
-	var total_keyword = get_parent().total_keyword
-	var possible_keyword = get_parent().keywords
+func prepare_keyword():
+	var total_keyword = root.total_keyword
+	var possible_keyword = root.keywords
 	# An array for checking keyword already used or not, [name][is_used]
 	var temp_keyword = []
 	for i in possible_keyword.size():

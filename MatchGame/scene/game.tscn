@@ -1,0 +1,181 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://MatchGame/scene/game.gd" type="Script" id=1]
+[ext_resource path="res://MatchGame/images/Top UI.png" type="Texture" id=2]
+[ext_resource path="res://MatchGame/fonts/Comfortaa-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://MatchGame/fonts/score.tres" type="DynamicFont" id=4]
+[ext_resource path="res://MatchGame/script/score.gd" type="Script" id=5]
+[ext_resource path="res://MatchGame/fonts/keyword.tres" type="DynamicFont" id=6]
+[ext_resource path="res://MatchGame/script/keyword.gd" type="Script" id=7]
+[ext_resource path="res://MatchGame/script/keyword_timer.gd" type="Script" id=8]
+[ext_resource path="res://MatchGame/fonts/timer.tres" type="DynamicFont" id=9]
+[ext_resource path="res://MatchGame/script/grid.gd" type="Script" id=10]
+[ext_resource path="res://MatchGame/script/wrong_timer.gd" type="Script" id=11]
+[ext_resource path="res://MatchGame/fonts/wrong.tres" type="DynamicFont" id=12]
+[ext_resource path="res://MatchGame/script/correct_timer.gd" type="Script" id=13]
+[ext_resource path="res://MatchGame/fonts/correct.tres" type="DynamicFont" id=14]
+[ext_resource path="res://MatchGame/scene/countdown.tscn" type="PackedScene" id=15]
+[ext_resource path="res://MatchGame/sounds/wrong.ogg" type="AudioStream" id=16]
+[ext_resource path="res://MatchGame/sounds/correct.ogg" type="AudioStream" id=17]
+[ext_resource path="res://MatchGame/images/reset_button.png" type="Texture" id=18]
+[ext_resource path="res://MatchGame/scene/restart.tscn" type="PackedScene" id=19]
+
+[sub_resource type="DynamicFont" id=1]
+size = 18
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+extra_spacing_char = 3
+font_data = ExtResource( 3 )
+
+[node name="game" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="top_ui" type="TextureRect" parent="."]
+editor/display_folded = true
+margin_left = 20.9705
+margin_top = 3.40117
+margin_right = 548.971
+margin_bottom = 331.401
+rect_scale = Vector2( 1, 1.1 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="score_label" type="Label" parent="top_ui"]
+margin_left = 232.0
+margin_top = 3.0
+margin_right = 329.0
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 1 )
+custom_constants/line_spacing = 0
+text = "SCORE"
+
+[node name="score" type="Label" parent="."]
+margin_left = 212.0
+margin_top = 41.0
+margin_right = 377.0
+margin_bottom = 78.0
+grow_horizontal = 2
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0.243137, 1, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "0"
+align = 1
+script = ExtResource( 5 )
+
+[node name="keyword" type="Label" parent="."]
+margin_left = 54.0494
+margin_top = 101.0
+margin_right = 523.049
+margin_bottom = 156.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 6 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "KEYWORD"
+align = 1
+valign = 1
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="keyword_timer" type="Timer" parent="keyword"]
+wait_time = 5.0
+script = ExtResource( 8 )
+
+[node name="time_remaining" type="Label" parent="keyword/keyword_timer"]
+margin_left = 265.0
+margin_top = 177.0
+margin_right = 328.0
+margin_bottom = 205.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 9 )
+custom_colors/font_color = Color( 0.964706, 0.764706, 0.0745098, 1 )
+align = 1
+valign = 1
+
+[node name="grid" type="Node2D" parent="."]
+editor/display_folded = true
+position = Vector2( 23.8504, 2.65009 )
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_group_": true
+}
+width = 7
+height = 9
+x_start = 40
+y_start = 870
+offset = 75
+
+[node name="grid_container" type="ColorRect" parent="grid"]
+modulate = Color( 1, 1, 1, 0.682353 )
+margin_left = -9.8504
+margin_top = 222.35
+margin_right = 540.15
+margin_bottom = 922.35
+color = Color( 0, 0, 0, 1 )
+
+[node name="wrong_timer" type="Timer" parent="grid"]
+editor/display_folded = true
+script = ExtResource( 11 )
+
+[node name="wrong_message" type="Label" parent="grid/wrong_timer"]
+margin_left = 414.057
+margin_top = 173.882
+margin_right = 535.057
+margin_bottom = 213.882
+grow_horizontal = 2
+custom_fonts/font = ExtResource( 12 )
+custom_colors/font_color = Color( 1, 0.172549, 0, 1 )
+text = "Wrong"
+align = 1
+
+[node name="correct_timer" type="Timer" parent="grid"]
+editor/display_folded = true
+script = ExtResource( 13 )
+
+[node name="correct_message" type="Label" parent="grid/correct_timer"]
+margin_left = 39.092
+margin_top = 174.246
+margin_right = 158.092
+margin_bottom = 210.246
+grow_horizontal = 2
+custom_fonts/font = ExtResource( 14 )
+custom_colors/font_color = Color( 0, 0.996078, 0.180392, 1 )
+text = "Correct"
+align = 1
+
+[node name="countdown" parent="." instance=ExtResource( 15 )]
+
+[node name="wrong_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 16 )
+
+[node name="correct_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 17 )
+
+[node name="restart_button" type="Button" parent="."]
+margin_left = 12.7556
+margin_top = 7.97224
+margin_right = 152.756
+margin_bottom = 141.972
+rect_scale = Vector2( 0.4, 0.4 )
+icon = ExtResource( 18 )
+flat = true
+
+[node name="restart" parent="." instance=ExtResource( 19 )]
+pause_mode = 2
+[connection signal="game_end" from="keyword/keyword_timer" to="grid" method="_on_keyword_timer_game_end"]
+[connection signal="start_countdown" from="keyword/keyword_timer" to="countdown" method="_on_keyword_timer_start_countdown"]
+[connection signal="timeout" from="keyword/keyword_timer" to="keyword/keyword_timer" method="_on_keyword_timer_timeout"]
+[connection signal="correct_keyword" from="grid" to="grid/correct_timer" method="_on_grid_correct_keyword"]
+[connection signal="correct_keyword" from="grid" to="score" method="_on_grid_correct_keyword"]
+[connection signal="wrong_keyword" from="grid" to="grid/wrong_timer" method="_on_grid_wrong_keyword"]
+[connection signal="timeout" from="grid/wrong_timer" to="grid/wrong_timer" method="_on_wrong_timer_timeout"]
+[connection signal="timeout" from="grid/wrong_timer" to="grid" method="_on_wrong_timer_timeout"]
+[connection signal="timeout" from="grid/correct_timer" to="grid/correct_timer" method="_on_correct_timer_timeout"]
+[connection signal="countdown_end" from="countdown" to="keyword/keyword_timer" method="_on_countdown_countdown_end"]
+[connection signal="pressed" from="restart_button" to="restart" method="_on_restart_button_pressed"]
+[connection signal="restart_game" from="restart" to="." method="_on_restart_restart_game"]

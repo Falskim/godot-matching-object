@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://MatchGame/script/start_timer.gd" type="Script" id=1]
+[ext_resource path="res://MatchGame/fonts/Comfortaa-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://MatchGame/scene/countdown.tscn" type="PackedScene" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 90
+outline_size = 5
+outline_color = Color( 0.4, 0.4, 0.4, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Label
+
+func update_time():
+	var time = $countdown.counter_limit - $countdown.counter - 1
+	set_text(str(time)) 
+	if time == 3:
+		modulate = Color(0, 0, 1)
+	if time == 2:
+		modulate = Color(0, 1, 0)
+	if time == 1:
+		modulate = Color(1, 0, 0)
+	
+func _on_countdown_timeout():
+	update_time()
+"
+
+[node name="start_timer" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="opaque" type="ColorRect" parent="."]
+margin_right = 576.0
+margin_bottom = 1024.0
+color = Color( 0, 0, 0, 0.670588 )
+
+[node name="time" type="Label" parent="."]
+margin_left = 149.096
+margin_top = 458.648
+margin_right = 434.096
+margin_bottom = 560.648
+custom_fonts/font = SubResource( 1 )
+text = "Ready"
+align = 1
+script = SubResource( 2 )
+
+[node name="countdown" parent="time" instance=ExtResource( 3 )]
+[connection signal="countdown_end" from="time/countdown" to="." method="_on_countdown_countdown_end"]
+[connection signal="timeout" from="time/countdown" to="time" method="_on_countdown_timeout"]
