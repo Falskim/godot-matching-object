@@ -12,3 +12,6 @@ func reset_score():
 
 func update_score():
 	set_text(str(score))
+	
+func get_score():
+	return score

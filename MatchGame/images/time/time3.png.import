@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Pentagon.png-b705cd946dba53a875d4b023e73d1990.stex"
+path="res://.import/time3.png-0b89c2e9d0211d51661d0cca2918d821.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://MatchGame/art/shape/Pentagon.png"
-dest_files=[ "res://.import/Pentagon.png-b705cd946dba53a875d4b023e73d1990.stex" ]
+source_file="res://MatchGame/images/time/time3.png"
+dest_files=[ "res://.import/time3.png-0b89c2e9d0211d51661d0cca2918d821.stex" ]
 
 [params]
 

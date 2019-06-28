@@ -7,6 +7,8 @@ func start_game():
 	randomize()
 	$keyword.prepare_keyword()
 	$keyword.next_keyword()
+	$keyword/keyword_timer.wait_time = get_parent().key_timer
+	$keyword/keyword_timer.time_limit = get_parent().key_timer + 1
 	$keyword/keyword_timer.start()
 	$grid.allow_input = true
 	$keyword/keyword_timer.countdown_played = false
@@ -31,7 +33,7 @@ func _on_restart_restart_game():
 	restart_game()	
 	
 func _on_keyword_timer_game_end():
-	var score = $score.score
+	var score = $top_ui/score.get_score()
 	var star
 	if score <= 100:
 		star = 1

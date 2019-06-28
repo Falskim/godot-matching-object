@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Right_Triangle.png-d74d184a7eaafb878b1943b02355c0b4.stex"
+path="res://.import/time2.png-f1fae17bf3a0d3188f668d81fe8f96c1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://MatchGame/art/shape/Right_Triangle.png"
-dest_files=[ "res://.import/Right_Triangle.png-d74d184a7eaafb878b1943b02355c0b4.stex" ]
+source_file="res://MatchGame/images/time/time2.png"
+dest_files=[ "res://.import/time2.png-f1fae17bf3a0d3188f668d81fe8f96c1.stex" ]
 
 [params]
 

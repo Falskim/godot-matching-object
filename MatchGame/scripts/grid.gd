@@ -12,7 +12,8 @@ export (bool) var debug = true
 onready var root = get_parent().get_parent()
 onready var explosion_effect = load("res://MatchGame/scenes/explosion_effect.tscn")
 onready var tile_path = load("res://MatchGame/scenes/tile.tscn")
-onready var keywod_sprite_resources = root.get_resource()
+onready var keyword_sprite_resources = root.get_resource()
+
 
 # All tiles on the grid
 onready var is_grid_ready = false
@@ -38,9 +39,9 @@ func prepare_tiles_grid():
 
 func _set_tile_detail(i, j, value):
 	# Keyword names
-	all_tiles[i][j].names = keywod_sprite_resources[value][0]
+	all_tiles[i][j].names = keyword_sprite_resources[value][0]
 	# Sprite Texture
-	all_tiles[i][j].set_sprite(keywod_sprite_resources[value][1])
+	all_tiles[i][j].set_sprite(keyword_sprite_resources[value][1])
 	# Position
 	all_tiles[i][j].position = grid_to_pixel(i, j)
 	# Color
@@ -48,7 +49,8 @@ func _set_tile_detail(i, j, value):
 	
 func generate_tiles():
 	var tile
-	var total_object = keywod_sprite_resources.size()
+	var total_object = keyword_sprite_resources.size()
+	print(keyword_sprite_resources)
 	var object_amount = []
 	for i in total_object:
 		object_amount.append([])
@@ -58,7 +60,7 @@ func generate_tiles():
 	for i in width:
 		for j in height:
 			var loop_counter = 0
-			var rand = floor(rand_range(0, keywod_sprite_resources.size()))
+			var rand = floor(rand_range(0, keyword_sprite_resources.size()))
 			if all_tiles[i][j] == null:
 				tile = tile_path.instance()
 				add_child(tile)
@@ -67,7 +69,7 @@ func generate_tiles():
 				tile = all_tiles[i][j]
 			_set_tile_detail(i, j, rand)
 			while (object_amount[rand] > threshold or has_name_adjacent(tile.names, i, j)) and loop_counter < 100:
-				rand = floor(rand_range(0, keywod_sprite_resources.size()))
+				rand = floor(rand_range(0, keyword_sprite_resources.size()))
 				_set_tile_detail(i, j, rand)
 				loop_counter += 1
 			object_amount[rand] += 1
@@ -75,7 +77,7 @@ func generate_tiles():
 				tile.randomize_color()
 	# Checking if certain object doesn't appear
 	var total = 0
-	for i in keywod_sprite_resources.size():
+	for i in keyword_sprite_resources.size():
 		if object_amount[i] < threshold*2/3:
 			var x = floor(rand_range(0, width))
 			var y = floor(rand_range(0, height))
@@ -171,7 +173,7 @@ func play_sound_effect(effect):
 	get_parent().get_node(effect).play()
 
 func change_tile(_position):
-	var rand = floor(rand_range(0, keywod_sprite_resources.size()))
+	var rand = floor(rand_range(0, keyword_sprite_resources.size()))
 	_set_tile_detail(_position.x, _position.y, rand)
 
 func start_effect(effect, _position):

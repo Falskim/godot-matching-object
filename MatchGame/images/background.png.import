@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Rectangle.png-26c4a7c879377ab422779ac0f2d6ec6b.stex"
+path="res://.import/background.png-a2456ee20bb7cef98451fa89b5227a3e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://MatchGame/art/shape/Rectangle.png"
-dest_files=[ "res://.import/Rectangle.png-26c4a7c879377ab422779ac0f2d6ec6b.stex" ]
+source_file="res://MatchGame/images/background.png"
+dest_files=[ "res://.import/background.png-a2456ee20bb7cef98451fa89b5227a3e.stex" ]
 
 [params]
 

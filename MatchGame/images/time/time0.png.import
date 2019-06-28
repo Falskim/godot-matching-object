@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Semi_Circle.png-fc726e627bd2d14cdd337df391b8d518.stex"
+path="res://.import/time0.png-76def1c73713a1b71630e5d33729230b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://MatchGame/art/shape/Semi_Circle.png"
-dest_files=[ "res://.import/Semi_Circle.png-fc726e627bd2d14cdd337df391b8d518.stex" ]
+source_file="res://MatchGame/images/time/time0.png"
+dest_files=[ "res://.import/time0.png-76def1c73713a1b71630e5d33729230b.stex" ]
 
 [params]
 

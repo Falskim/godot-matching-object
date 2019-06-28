@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://MatchGame/scripts/game_controller.gd" type="Script" id=1]
-[ext_resource path="res://MatchGame/images/backGround.png" type="Texture" id=2]
+[ext_resource path="res://MatchGame/images/background.png" type="Texture" id=2]
 [ext_resource path="res://MatchGame/scenes/game.tscn" type="PackedScene" id=3]
 [ext_resource path="res://MatchGame/scenes/start_timer.tscn" type="PackedScene" id=4]
 [ext_resource path="res://MatchGame/scenes/tutorial.tscn" type="PackedScene" id=5]
@@ -9,8 +9,7 @@
 
 [node name="game_controller" type="Node2D"]
 script = ExtResource( 1 )
-total_keyword = 1
-key_timer = 4
+total_keyword = 3
 
 [node name="background" type="TextureRect" parent="."]
 margin_right = 576.0
@@ -25,9 +24,11 @@ editor/display_folded = true
 
 [node name="start_timer" parent="." instance=ExtResource( 4 )]
 editor/display_folded = true
+visible = false
 
 [node name="tutorial" parent="." instance=ExtResource( 5 )]
 editor/display_folded = true
+visible = false
 
 [node name="bgm" type="AudioStreamPlayer" parent="."]
 pause_mode = 2

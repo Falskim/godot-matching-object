@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Scaleless_triangle.png-05eb6b21f05010bf38895b061b8cd2c3.stex"
+path="res://.import/time4.png-543e970bcdcda0a750b326edee31e7e6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://MatchGame/art/shape/Scaleless_triangle.png"
-dest_files=[ "res://.import/Scaleless_triangle.png-05eb6b21f05010bf38895b061b8cd2c3.stex" ]
+source_file="res://MatchGame/images/time/time4.png"
+dest_files=[ "res://.import/time4.png-543e970bcdcda0a750b326edee31e7e6.stex" ]
 
 [params]
 
