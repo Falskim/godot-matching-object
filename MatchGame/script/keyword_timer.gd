@@ -38,7 +38,6 @@ func _on_keyword_timer_timeout():
 		$time_remaining.set_text("0")
 		set_process(false)
 		emit_signal("game_end")
-		queue_free()
 
 func _on_countdown_countdown_end():
 	countdown_played = false

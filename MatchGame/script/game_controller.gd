@@ -36,8 +36,10 @@ func _ready():
 	play_music()
 	get_resource()
 	if !$tutorial.is_visible():
-		if $start_game.is_visible():
+		if $start_timer.is_visible():
 			start_game_countdown()
+		else:
+			start_game()
 
 func get_resource():
 	var texture = get_texture_resource()
@@ -66,6 +68,8 @@ func start_game():
 	$game.start_game()
 
 func start_game_countdown():
+	$start_timer/time.set_text("Ready")
+	$start_timer/time.modulate = Color(1, 1, 1)
 	$start_timer/time/countdown.start_countdown()
 
 func _on_tutorial_end_tutorial():
@@ -75,3 +79,7 @@ func _on_tutorial_end_tutorial():
 func _on_start_timer_end_start_timer():
 	start_game()
 	$start_timer.visible = false
+
+func _on_game_start_timer():
+	start_game_countdown()
+	$start_timer.visible = true

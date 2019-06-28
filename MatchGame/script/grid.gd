@@ -15,7 +15,8 @@ onready var tile_path = load("res://MatchGame/scene/tile.tscn")
 onready var keywod_sprite_resources = root.get_resource()
 
 # All tiles on the grid
-var all_tiles = []
+onready var all_tiles
+onready var is_grid_ready = false
 
 # Signal
 signal wrong_keyword
@@ -33,6 +34,7 @@ func prepare_tiles_grid():
 		for j in height:
 			array[i].append(null)
 	all_tiles = array
+	is_grid_ready = true
 
 func _set_tile_detail(i, j, value):
 	# Keyword names
@@ -58,9 +60,13 @@ func generate_tiles():
 		for j in height:
 			var loop_counter = 0
 			var rand = floor(rand_range(0, keywod_sprite_resources.size()))
-			tile = tile_res.instance()
-			add_child(tile)
-			all_tiles[i][j] = tile
+			if all_tiles[i][j] == null:
+				tile = tile_res.instance()
+				add_child(tile)
+				all_tiles[i][j] = tile
+			else:
+				tile = all_tiles[i][j]
+				print("Changing " + str(i) + str(j))
 			_set_tile_detail(i, j, rand)
 			while (object_amount[rand] > threshold or has_name_adjacent(tile.names, i, j)) and loop_counter < 100:
 				rand = floor(rand_range(0, keywod_sprite_resources.size()))
@@ -69,39 +75,6 @@ func generate_tiles():
 			object_amount[rand] += 1
 			while has_color_adjacent(i, j):
 				tile.randomize_color()
-	# Checking if certain object doesn't appear
-	var total = 0
-	for i in keywod_sprite_resources.size():
-		if object_amount[i] < threshold*2/3:
-			var x = floor(rand_range(0, width))
-			var y = floor(rand_range(0, height))
-			_set_tile_detail(x, y, i)
-			object_amount[i] += 1
-		total += object_amount[i]
-	print("Tile Object Distribution : ")
-	print(object_amount)
-	print(total)
-
-func regenerate_tiles():
-	var tile
-	var total_object = keywod_sprite_resources.size()
-	var object_amount = []
-	for i in total_object:
-		object_amount.append([])
-		object_amount[i] = 0
-	var threshold = (width*height)/total_object
-	for i in width:
-		for j in height:
-			var loop_counter = 0
-			var rand = floor(rand_range(0, keywod_sprite_resources.size()))
-			_set_tile_detail(i, j, rand)
-			while (object_amount[rand] > threshold or has_name_adjacent(all_tiles[i][j].names, i, j)) and loop_counter < 100:
-				rand = floor(rand_range(0, keywod_sprite_resources.size()))
-				_set_tile_detail(i, j, rand)
-				loop_counter += 1
-			object_amount[rand] += 1
-			while has_color_adjacent(i, j):
-				all_tiles[i][j].randomize_color()
 	# Checking if certain object doesn't appear
 	var total = 0
 	for i in keywod_sprite_resources.size():

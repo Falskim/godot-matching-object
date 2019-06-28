@@ -9,7 +9,7 @@
 
 [node name="game_controller" type="Node2D"]
 script = ExtResource( 1 )
-total_keyword = 2
+total_keyword = 5
 
 [node name="background" type="TextureRect" parent="."]
 margin_right = 576.0
@@ -30,6 +30,7 @@ editor/display_folded = true
 [node name="bgm" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
 stream = ExtResource( 6 )
+[connection signal="start_timer" from="game" to="." method="_on_game_start_timer"]
 [connection signal="end_start_timer" from="start_timer" to="start_timer" method="_on_start_timer_end_start_timer"]
 [connection signal="end_start_timer" from="start_timer" to="." method="_on_start_timer_end_start_timer"]
 [connection signal="end_tutorial" from="tutorial" to="." method="_on_tutorial_end_tutorial"]
