@@ -1,7 +1,7 @@
 extends Timer
 
-var counter
 export (int) var counter_limit = 3
+var counter
 
 signal countdown_end
 

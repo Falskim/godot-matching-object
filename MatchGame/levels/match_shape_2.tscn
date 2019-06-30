@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://MatchGame/scenes/match_game.tscn" type="PackedScene" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends \"res://MatchGame/scripts/match_game.gd\"
+
+export (String) var images_directory = \"shape\"
+export (Array) var available_keywords = [
+#\"equilateral triangle\",
+#\"isosceles triangle\",
+#\"kite\",
+#\"right triangle\",
+#\"rhombus\",
+#\"scaleless triangle\",
+#\"ellipse\",
+#\"parallelogram\",
+#\"diamond\",
+\"semi circle\",
+\"crescent\",
+\"star\",
+\"heart\",
+##\"triangle\",
+\"trapezoid\",
+\"octagon\",
+\"heptagon\",
+\"hexagon\"
+#\"pentagon\",
+#\"rectangle\",
+#\"square\",
+#\"circle\"
+]
+
+func _on_ready():
+	.set_keywords(available_keywords)
+	.set_game_type(images_directory)
+	._on_ready()
+	"
+
+[node name="shape_2" instance=ExtResource( 1 )]
+script = SubResource( 1 )
+total_used_keyword = 10
+key_timer = 5
+score_1_star = 1
+score_2_star = 1
+score_3_star = 1

@@ -17,3 +17,6 @@ func randomize_color():
 
 func set_sprite(texture):
 	$Sprite.set_texture(load(texture))
+	
+func get_name():
+	return names

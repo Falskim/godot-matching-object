@@ -1,10 +1,10 @@
 [gd_resource type="Animation" format=2]
 
 [resource]
-resource_name = "slide_in_right"
+resource_name = "slide_in_left"
 length = 0.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("panel:rect_position")
+tracks/0/path = NodePath(".:offset")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -13,5 +13,5 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 630, 270 ), Vector2( 33, 270 ) ]
+"values": [ Vector2( -576, 0 ), Vector2( 0, 0 ) ]
 }

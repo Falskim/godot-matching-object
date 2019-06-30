@@ -1,0 +1,50 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Menu/scripts/level_button.gd" type="Script" id=1]
+[ext_resource path="res://Menu/images/level/Red Button.png" type="Texture" id=2]
+[ext_resource path="res://Menu/images/level/Green Button.png" type="Texture" id=3]
+[ext_resource path="res://Menu/images/level/star0.png" type="Texture" id=4]
+[ext_resource path="res://Menu/images/level/star1.png" type="Texture" id=5]
+[ext_resource path="res://Menu/images/level/star2.png" type="Texture" id=6]
+[ext_resource path="res://Menu/images/level/star3.png" type="Texture" id=7]
+[ext_resource path="res://Menu/fonts/Comfortaa-Regular.ttf" type="DynamicFontData" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+size = 50
+outline_size = 5
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 8 )
+
+[node name="level_button" type="Node2D"]
+position = Vector2( 55.9553, 3.61015 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+blocked_texture = ExtResource( 2 )
+open_texture = ExtResource( 3 )
+star_empty = ExtResource( 4 )
+star_1 = ExtResource( 5 )
+star_2 = ExtResource( 6 )
+star_3 = ExtResource( 7 )
+
+[node name="button" type="TextureButton" parent="."]
+margin_right = 97.0
+margin_bottom = 97.0
+texture_normal = ExtResource( 2 )
+
+[node name="level_label" type="Label" parent="button"]
+margin_left = 19.855
+margin_top = 20.66
+margin_right = 71.855
+margin_bottom = 77.66
+custom_fonts/font = SubResource( 1 )
+text = "1"
+align = 1
+valign = 1
+
+[node name="star" type="Sprite" parent="."]
+position = Vector2( 44.9669, 134.641 )
+scale = Vector2( 1.27075, 1 )
+texture = ExtResource( 4 )
+[connection signal="pressed" from="button" to="." method="_on_button_pressed"]

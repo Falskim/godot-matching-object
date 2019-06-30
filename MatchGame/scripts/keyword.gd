@@ -11,7 +11,7 @@ var current_keyword
 
 func prepare_keyword():
 	randomize()
-	var total_keyword = root.total_keyword
+	var total_keyword = root.total_used_keyword
 	var possible_keyword = root.keywords
 	# An array for checking keyword already used or not, [name][is_used]
 	var temp_keyword = []

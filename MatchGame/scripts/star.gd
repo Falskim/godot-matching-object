@@ -1,8 +1,14 @@
 extends CanvasLayer
 
 var score
+var menu_path = "res://Menu/scenes/game_controller.tscn"
+
 signal restart_game
-signal back_menu
+
+func zero_star():
+	$AnimationPlayer.play("0 star")
+	update_score()
+	print("Animation 0")
 
 func one_star():
 	$AnimationPlayer.play("1 star")
@@ -25,14 +31,14 @@ func _on_retry_pressed():
 	emit_signal("restart_game")
 
 func _on_exit_pressed():
-	get_tree().quit()
-	emit_signal("back_menu")
+	return get_tree().change_scene(menu_path)
 
 # Bikin sesuai game
-func _on_game_game_result(star, score):
+func game_result(star, score):
 	self.score = score
-	print(star)
-	if star == 1:
+	if star == 0:
+		zero_star()
+	elif star == 1:
 		one_star()
 	elif star == 2:
 		two_star()

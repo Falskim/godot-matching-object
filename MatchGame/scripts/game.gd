@@ -1,7 +1,7 @@
 extends Node2D
 
 signal start_timer
-signal game_result
+signal game_end
 
 func start_game():
 	randomize()
@@ -30,17 +30,9 @@ func restart_game():
 	
 func _on_restart_restart_game():
 	restart_game()	
-	
-func _on_keyword_timer_game_end():
-	var score = $top_ui/score.get_score()
-	var star
-	if score <= 100:
-		star = 1
-	elif score > 100 and score <= 300:
-		star = 2
-	elif score > 300:
-		star = 3
-	emit_signal("game_result", star, score)
 
 func _on_star_restart_game():
 	restart_game()
+
+func _on_keyword_timer_game_end():
+	emit_signal("game_end")

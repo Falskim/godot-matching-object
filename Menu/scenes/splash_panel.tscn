@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Menu/scenes/panel_base.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Menu/scripts/splash_screen.gd" type="Script" id=2]
+[ext_resource path="res://Menu/images/buttons/playNormal.png" type="Texture" id=3]
+
+[node name="splash_panel" index="0" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="play_button" type="TextureButton" parent="." index="2"]
+margin_left = 175.759
+margin_top = 742.98
+margin_right = 687.759
+margin_bottom = 1126.98
+rect_scale = Vector2( 0.4, 0.4 )
+texture_normal = ExtResource( 3 )
+[connection signal="pressed" from="play_button" to="." method="_on_play_button_pressed"]

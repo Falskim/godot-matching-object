@@ -28,13 +28,12 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Sprite
 
-export (Texture) onready var time_0
-export (Texture) onready var time_1
-export (Texture) onready var time_2
-export (Texture) onready var time_3
-export (Texture) onready var time_4
-export (Texture) onready var time_5
-"
+export (Texture) var time_0
+export (Texture) var time_1
+export (Texture) var time_2
+export (Texture) var time_3
+export (Texture) var time_4
+export (Texture) var time_5"
 
 [node name="game" type="Node2D"]
 script = ExtResource( 1 )
@@ -154,12 +153,11 @@ flat = true
 
 [node name="restart" parent="." instance=ExtResource( 23 )]
 pause_mode = 2
+editor/display_folded = true
 
 [node name="star" parent="." instance=ExtResource( 24 )]
-[connection signal="game_result" from="." to="star" method="_on_game_game_result"]
 [connection signal="game_end" from="keyword/keyword_timer" to="." method="_on_keyword_timer_game_end"]
 [connection signal="game_end" from="keyword/keyword_timer" to="grid" method="_on_keyword_timer_game_end"]
-[connection signal="start_countdown" from="keyword/keyword_timer" to="countdown" method="_on_keyword_timer_start_countdown"]
 [connection signal="timeout" from="keyword/keyword_timer" to="keyword/keyword_timer" method="_on_keyword_timer_timeout"]
 [connection signal="correct_keyword" from="grid" to="grid/correct_timer" method="_on_grid_correct_keyword"]
 [connection signal="correct_keyword" from="grid" to="top_ui/score" method="_on_grid_correct_keyword"]

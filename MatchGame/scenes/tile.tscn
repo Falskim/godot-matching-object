@@ -2,7 +2,6 @@
 
 [ext_resource path="res://MatchGame/scripts/tile.gd" type="Script" id=1]
 
-
 [node name="tile" type="Node2D"]
 script = ExtResource( 1 )
 
