@@ -1,16 +1,13 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://MatchGame/scripts/tutorial.gd" type="Script" id=1]
 [ext_resource path="res://MatchGame/images/tutorial.png" type="Texture" id=2]
 [ext_resource path="res://MatchGame/fonts/keyword.tres" type="DynamicFont" id=3]
 [ext_resource path="res://MatchGame/images/arrow.png" type="Texture" id=4]
 [ext_resource path="res://MatchGame/images/tutorial_text_container.png" type="Texture" id=5]
-[ext_resource path="res://MatchGame/fonts/Comfortaa-Regular.ttf" type="DynamicFontData" id=6]
-[ext_resource path="res://MatchGame/fonts/tutorial.tres" type="DynamicFont" id=7]
-[ext_resource path="res://MatchGame/images/play_button.png" type="Texture" id=8]
-[ext_resource path="res://MatchGame/anims/slide_out_down.tres" type="Animation" id=9]
-
-
+[ext_resource path="res://MatchGame/fonts/tutorial.tres" type="DynamicFont" id=6]
+[ext_resource path="res://MatchGame/images/play_button.png" type="Texture" id=7]
+[ext_resource path="res://MatchGame/anims/slide_out_down.tres" type="Animation" id=8]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
@@ -71,14 +68,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 241.926, 503.455 ), Vector2( 204.243, 504.962 ), Vector2( 241.926, 503.455 ) ]
 }
-
-[sub_resource type="DynamicFont" id=5]
-size = 34
-outline_size = 5
-outline_color = Color( 0, 0, 0, 1 )
-use_filter = true
-extra_spacing_char = 1
-font_data = ExtResource( 6 )
 
 [node name="tutorial" type="Node2D"]
 script = ExtResource( 1 )
@@ -163,22 +152,12 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="tutorial_title" type="Label" parent="text_container"]
-margin_left = 145.816
-margin_top = 18.0
-margin_right = 386.816
-margin_bottom = 56.0
-rect_pivot_offset = Vector2( -38.9417, 158.751 )
-custom_fonts/font = SubResource( 5 )
-text = "How To Play"
-align = 1
-
 [node name="tutorial_content" type="Label" parent="text_container"]
-margin_left = -74.8628
-margin_top = 88.6594
-margin_right = 627.137
-margin_bottom = 232.659
-custom_fonts/font = ExtResource( 7 )
+margin_left = 23.0
+margin_top = 89.0
+margin_right = 522.0
+margin_bottom = 233.0
+custom_fonts/font = ExtResource( 6 )
 custom_colors/font_color = Color( 0, 1, 0.878431, 1 )
 text = "Pick the right object 
 as much as you can 
@@ -191,10 +170,10 @@ margin_top = 888.0
 margin_right = 726.0
 margin_bottom = 1278.0
 rect_scale = Vector2( 0.35, 0.25 )
-icon = ExtResource( 8 )
+icon = ExtResource( 7 )
 flat = true
 
 [node name="slide_out" type="AnimationPlayer" parent="."]
-anims/slide_out_down = ExtResource( 9 )
+anims/slide_out_down = ExtResource( 8 )
 [connection signal="pressed" from="play_button" to="." method="_on_play_button_pressed"]
 [connection signal="animation_finished" from="slide_out" to="." method="_on_slide_out_animation_finished"]

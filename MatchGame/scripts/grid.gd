@@ -48,9 +48,9 @@ func _set_tile_detail(i, j, value):
 	all_tiles[i][j].randomize_color()
 	
 func generate_tiles():
+	randomize()
 	var tile
 	var total_object = keyword_sprite_resources.size()
-	print(keyword_sprite_resources)
 	var object_amount = []
 	for i in total_object:
 		object_amount.append([])

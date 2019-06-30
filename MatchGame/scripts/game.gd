@@ -22,9 +22,8 @@ func restart_game():
 	randomize()
 	$grid.allow_input = false
 	$countdown.stop()
-	$score.reset_score()
+	$top_ui/score.reset_score()
 	$keyword/keyword_timer.stop()
-	$keyword/keyword_timer/time_remaining.set_text("")
 	$keyword/keyword_timer.countdown_played = true
 	$keyword.current_keyword = null
 	emit_signal("start_timer")

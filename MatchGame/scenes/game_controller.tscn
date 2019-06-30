@@ -24,11 +24,9 @@ editor/display_folded = true
 
 [node name="start_timer" parent="." instance=ExtResource( 4 )]
 editor/display_folded = true
-visible = false
 
 [node name="tutorial" parent="." instance=ExtResource( 5 )]
 editor/display_folded = true
-visible = false
 
 [node name="bgm" type="AudioStreamPlayer" parent="."]
 pause_mode = 2

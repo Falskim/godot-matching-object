@@ -45,15 +45,12 @@ margin_top = 3.40117
 margin_right = 548.971
 margin_bottom = 331.401
 texture = ExtResource( 2 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="score" type="Label" parent="top_ui"]
-margin_left = 179.239
-margin_top = 56.6442
-margin_right = 344.24
-margin_bottom = 93.6442
+margin_left = 179.0
+margin_top = 60.0
+margin_right = 344.0
+margin_bottom = 93.0
 grow_horizontal = 2
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0.243137, 1, 0, 1 )
@@ -160,12 +157,12 @@ pause_mode = 2
 
 [node name="star" parent="." instance=ExtResource( 24 )]
 [connection signal="game_result" from="." to="star" method="_on_game_game_result"]
-[connection signal="game_end" from="keyword/keyword_timer" to="grid" method="_on_keyword_timer_game_end"]
 [connection signal="game_end" from="keyword/keyword_timer" to="." method="_on_keyword_timer_game_end"]
+[connection signal="game_end" from="keyword/keyword_timer" to="grid" method="_on_keyword_timer_game_end"]
 [connection signal="start_countdown" from="keyword/keyword_timer" to="countdown" method="_on_keyword_timer_start_countdown"]
 [connection signal="timeout" from="keyword/keyword_timer" to="keyword/keyword_timer" method="_on_keyword_timer_timeout"]
-[connection signal="correct_keyword" from="grid" to="top_ui/score" method="_on_grid_correct_keyword"]
 [connection signal="correct_keyword" from="grid" to="grid/correct_timer" method="_on_grid_correct_keyword"]
+[connection signal="correct_keyword" from="grid" to="top_ui/score" method="_on_grid_correct_keyword"]
 [connection signal="wrong_keyword" from="grid" to="grid/wrong_timer" method="_on_grid_wrong_keyword"]
 [connection signal="timeout" from="grid/wrong_timer" to="grid" method="_on_wrong_timer_timeout"]
 [connection signal="timeout" from="grid/wrong_timer" to="grid/wrong_timer" method="_on_wrong_timer_timeout"]
