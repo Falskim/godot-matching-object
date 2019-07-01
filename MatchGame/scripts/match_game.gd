@@ -1,6 +1,7 @@
 extends Node2D
 
 # Game Variabel
+export (int) var level
 export (int) var total_used_keyword = 10
 export (int) var key_timer = 5
 
@@ -59,6 +60,7 @@ func stop_music():
 
 func start_game():
 	$game/grid.resources = get_resource()
+	$game/top_ui/level.set_text("Level : " + str(level))
 	$game.start_game()
 
 func start_game_countdown():
@@ -91,3 +93,6 @@ func _on_game_game_end():
 		star = 3
 	print("Result : " + str(score) + "( " + str(star) + ")")
 	$game/star.game_result(star, score)
+	var unlocked = star > 0
+	GameDataManager.save_data(level, unlocked, score, star)
+	GameDataManager.unlock_next_level(level)

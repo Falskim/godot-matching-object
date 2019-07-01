@@ -4,6 +4,8 @@
 [ext_resource path="res://Menu/scripts/splash_screen.gd" type="Script" id=2]
 [ext_resource path="res://Menu/images/buttons/playNormal.png" type="Texture" id=3]
 
+
+
 [node name="splash_panel" index="0" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 

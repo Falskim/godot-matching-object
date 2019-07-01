@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://Menu/scripts/panel_base.gd" type="Script" id=1]
+[ext_resource path="res://Menu/scripts/base_panel.gd" type="Script" id=1]
 [ext_resource path="res://Menu/images/background.png" type="Texture" id=2]
 [ext_resource path="res://MatchGame/anims/slide_in.tres" type="Animation" id=3]
 [ext_resource path="res://Menu/anims/panel_slide.tres" type="Animation" id=4]

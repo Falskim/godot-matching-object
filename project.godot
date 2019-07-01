@@ -19,6 +19,10 @@ config/name="Match Object"
 run/main_scene="res://Menu/scenes/game_controller.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+GameDataManager="*res://SingletonScript/GameDataManager.gd"
+
 [display]
 
 window/size/width=576

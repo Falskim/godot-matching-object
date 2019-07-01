@@ -1,4 +1,4 @@
-extends "res://Menu/scripts/panel_base.gd"
+extends "res://Menu/scripts/base_panel.gd"
 
 signal back_level_select
 

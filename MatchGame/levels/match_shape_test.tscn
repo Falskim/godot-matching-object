@@ -7,24 +7,24 @@ script/source = "extends \"res://MatchGame/scripts/match_game.gd\"
 
 export (String) var images_directory = \"shape\"
 export (Array) var available_keywords = [
-#\"equilateral triangle\",
-#\"isosceles triangle\",
-#\"kite\",
-#\"right triangle\",
-#\"rhombus\",
-#\"scaleless triangle\",
-#\"ellipse\",
-#\"parallelogram\",
-#\"diamond\",
-\"semi circle\",
-\"crescent\",
-\"star\",
-\"heart\",
-##\"triangle\",
-\"trapezoid\",
-\"octagon\",
-\"heptagon\",
-\"hexagon\"
+\"equilateral triangle\",
+\"isosceles triangle\",
+\"kite\",
+\"right triangle\",
+\"rhombus\",
+\"scaleless triangle\",
+\"ellipse\",
+\"parallelogram\",
+\"diamond\",
+#\"semi circle\",
+#\"crescent\",
+#\"star\",
+#\"heart\",
+###\"triangle\",
+#\"trapezoid\",
+#\"octagon\",
+#\"heptagon\",
+#\"hexagon\"
 #\"pentagon\",
 #\"rectangle\",
 #\"square\",
@@ -39,5 +39,8 @@ func _on_ready():
 
 [node name="shape_2" instance=ExtResource( 1 )]
 script = SubResource( 1 )
-level = 2
+total_used_keyword = 10
 key_timer = 5
+score_1_star = 1
+score_2_star = 1
+score_3_star = 1

@@ -37,10 +37,7 @@ func _on_ready():
 	._on_ready()
 	"
 
-[node name="shape_1" index="0" instance=ExtResource( 1 )]
+[node name="shape_1" instance=ExtResource( 1 )]
 script = SubResource( 1 )
-total_used_keyword = 10
+level = 1
 key_timer = 5
-score_1_star = 1
-score_2_star = 1
-score_3_star = 1

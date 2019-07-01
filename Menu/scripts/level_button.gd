@@ -19,14 +19,30 @@ onready var star = $star
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	load_save_data()
 	setup()
 	
-func setup():
-	level_label.set_text(str(level))
-	if enabled:
-		button.set_normal_texture(open_texture)
+func load_save_data():
+	if GameDataManager.level_info.has(level):
+		enabled = GameDataManager.level_info[level]["unlocked"]
+		total_star = GameDataManager.level_info[level]["stars_unlocked"]
 	else:
-		button.set_normal_texture(blocked_texture)
+		enabled = false
+		total_star = 0
+	
+func setup():
+	# Setting texture and label
+	level_label.set_text(str(level))
+	button.set_normal_texture(open_texture)
+	button.set_disabled_texture(blocked_texture)
+	
+	# Setting button property allowed to click or not
+	if enabled:
+		button.disabled = false
+	else:
+		button.disabled = true
+
+	# Setting star sprites
 	if total_star == 0:
 		star.set_texture(star_empty)
 	elif total_star == 1:
