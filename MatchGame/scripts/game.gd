@@ -36,3 +36,6 @@ func _on_star_restart_game():
 
 func _on_keyword_timer_game_end():
 	emit_signal("game_end")
+
+func _on_pause_button_pressed():
+	pass # Replace with function body.

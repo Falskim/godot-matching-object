@@ -5,7 +5,7 @@
 [ext_resource path="res://MatchGame/images/no.png" type="Texture" id=3]
 [ext_resource path="res://MatchGame/images/yes.png" type="Texture" id=4]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "slide_in_right"
 length = 0.5
 tracks/0/type = "value"
@@ -21,8 +21,7 @@ tracks/0/keys = {
 "values": [ Vector2( 630, 270 ), Vector2( 33, 270 ) ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "slide_out_right"
+[sub_resource type="Animation" id=2]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("panel:rect_position")
@@ -67,7 +66,7 @@ margin_bottom = 152.0
 icon = ExtResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/slide_in_right = SubResource( 2 )
-anims/slide_out_right = SubResource( 1 )
+anims/slide_in_right = SubResource( 1 )
+anims/slide_out_right = SubResource( 2 )
 [connection signal="pressed" from="panel/HBoxContainer/no" to="." method="_on_no_pressed"]
 [connection signal="pressed" from="panel/HBoxContainer/yes" to="." method="_on_yes_pressed"]

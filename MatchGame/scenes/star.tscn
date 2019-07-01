@@ -4,7 +4,7 @@
 [ext_resource path="res://MatchGame/images/star_container.png" type="Texture" id=2]
 [ext_resource path="res://MatchGame/images/Star.png" type="Texture" id=3]
 [ext_resource path="res://MatchGame/images/reset_button.png" type="Texture" id=4]
-[ext_resource path="res://MatchGame/images/pause_button.png" type="Texture" id=5]
+[ext_resource path="res://MatchGame/images/back_menu_small.png" type="Texture" id=5]
 [ext_resource path="res://MatchGame/fonts/Comfortaa-Regular.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://MatchGame/anims/star.tres" type="Animation" id=7]
 
