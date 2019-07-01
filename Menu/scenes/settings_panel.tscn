@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Menu/scenes/panel_base.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Menu/scripts/settings_panel.gd" type="Script" id=2]
+[ext_resource path="res://Menu/images/buttons/backNormal.png" type="Texture" id=3]
+[ext_resource path="res://Menu/images/buttons/yesNormal.png" type="Texture" id=4]
+[ext_resource path="res://Menu/images/buttons/noNormal.png" type="Texture" id=5]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends TextureButton
+
+export (Texture) var sound_on
+export (Texture) var sound_off
+"
+
+[node name="settings_panel" index="0" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="level_select_button" type="TextureButton" parent="." index="2"]
+margin_left = 205.544
+margin_top = 854.476
+margin_right = 461.544
+margin_bottom = 1000.48
+rect_scale = Vector2( 0.5, 0.5 )
+texture_normal = ExtResource( 3 )
+
+[node name="sound_button" type="TextureButton" parent="." index="3"]
+margin_left = 153.894
+margin_top = 331.165
+margin_right = 409.894
+margin_bottom = 477.165
+texture_normal = ExtResource( 4 )
+script = SubResource( 1 )
+sound_on = ExtResource( 4 )
+sound_off = ExtResource( 5 )
+[connection signal="pressed" from="level_select_button" to="." method="_on_level_select_button_pressed"]
+[connection signal="pressed" from="sound_button" to="." method="_on_sound_button_pressed"]

@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 var score
-var menu_path = "res://Menu/scenes/game_controller.tscn"
+var menu_path = "res://Menu/scenes/menu_controller.tscn"
 
 signal restart_game
 

@@ -1,43 +1,62 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Menu/scenes/panel_base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Menu/scripts/level_select.gd" type="Script" id=2]
 [ext_resource path="res://Menu/images/background2.png" type="Texture" id=3]
-[ext_resource path="res://Menu/images/buttons/backNormal.png" type="Texture" id=4]
-[ext_resource path="res://Menu/scenes/level_button.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Menu/scenes/level_button.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Menu/images/buttons/retryNormal.png" type="Texture" id=5]
+[ext_resource path="res://Menu/images/buttons/backNormal.png" type="Texture" id=6]
+[ext_resource path="res://Menu/images/buttons/pauseNormal.png" type="Texture" id=7]
 
-[node name="level_select_panel" index="0" instance=ExtResource( 1 )]
-offset = Vector2( 0, 0 )
-transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+[node name="level_select_panel" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="background" parent="." index="0"]
 texture = ExtResource( 3 )
 
-[node name="back_button" type="TextureButton" parent="." index="2"]
+[node name="Control" type="Control" parent="." index="2"]
+editor/display_folded = true
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="shape_1" parent="Control" index="0" instance=ExtResource( 4 )]
+position = Vector2( 94.5807, 67.2284 )
+level = 1
+level_to_load = "res://MatchGame/levels/match_shape_1.tscn"
+
+[node name="shape_2" parent="Control" index="1" instance=ExtResource( 4 )]
+position = Vector2( 360.414, 64.9563 )
+level = 2
+level_to_load = "res://MatchGame/levels/match_shape_2.tscn"
+
+[node name="shape_3" parent="Control" index="2" instance=ExtResource( 4 )]
+position = Vector2( 99.1249, 296.709 )
+level = 3
+level_to_load = "res://MatchGame/levels/match_shape_3.tscn"
+
+[node name="reset_button" type="TextureButton" parent="." index="3"]
+margin_left = 497.509
+margin_top = 7.75629
+margin_right = 625.509
+margin_bottom = 135.756
+rect_scale = Vector2( 0.5, 0.5 )
+texture_normal = ExtResource( 5 )
+
+[node name="back_button" type="TextureButton" parent="." index="4"]
 margin_left = 233.043
 margin_top = 875.841
 margin_right = 489.043
 margin_bottom = 1021.84
 rect_scale = Vector2( 0.4, 0.4 )
-texture_normal = ExtResource( 4 )
+texture_normal = ExtResource( 6 )
 
-[node name="Control" type="Control" parent="." index="3"]
-margin_right = 40.0
-margin_bottom = 40.0
-
-[node name="shape_1" parent="Control" index="0" instance=ExtResource( 5 )]
-position = Vector2( 94.5807, 67.2284 )
-level = 1
-level_to_load = "res://MatchGame/levels/match_shape_1.tscn"
-
-[node name="shape_2" parent="Control" index="1" instance=ExtResource( 5 )]
-position = Vector2( 360.414, 64.9563 )
-level = 2
-level_to_load = "res://MatchGame/levels/match_shape_2.tscn"
-
-[node name="shape_3" parent="Control" index="2" instance=ExtResource( 5 )]
-position = Vector2( 99.1249, 296.709 )
-level = 3
-level_to_load = "res://MatchGame/levels/match_shape_3.tscn"
+[node name="settings_button" type="TextureButton" parent="." index="5"]
+margin_left = 11.0804
+margin_top = 11.0804
+margin_right = 139.08
+margin_bottom = 139.08
+rect_scale = Vector2( 0.4, 0.4 )
+texture_normal = ExtResource( 7 )
+[connection signal="pressed" from="reset_button" to="." method="_on_reset_button_pressed"]
 [connection signal="pressed" from="back_button" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="settings_button" to="." method="_on_settings_button_pressed"]

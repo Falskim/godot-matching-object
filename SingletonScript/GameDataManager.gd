@@ -59,6 +59,7 @@ func reset_data():
 		return
 	file.store_var(default_level_info)
 	file.close()
+	load_data()
 	if debug_mode:
 		print("Default reset data : ")
 		print(default_level_info)

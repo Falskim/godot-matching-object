@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Menu/scripts/menu_controller.gd" type="Script" id=1]
+[ext_resource path="res://Menu/scenes/settings_panel.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Menu/scenes/level_select_panel.tscn" type="PackedScene" id=3]
+
+[node name="menu_controller" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="background" type="ColorRect" parent="."]
+margin_right = 576.0
+margin_bottom = 1024.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="settings_panel" parent="." instance=ExtResource( 2 )]
+
+[node name="level_select_panel" parent="." instance=ExtResource( 3 )]
+offset = Vector2( 576, 0 )
+transform = Transform2D( 1, 0, 0, 1, 576, 0 )
+[connection signal="to_level_select" from="settings_panel" to="." method="_on_settings_panel_to_level_select"]
+[connection signal="back_to_splash" from="level_select_panel" to="." method="_on_level_select_panel_back_to_splash"]
+[connection signal="to_settings" from="level_select_panel" to="." method="_on_level_select_panel_to_settings"]
