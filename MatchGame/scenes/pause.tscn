@@ -1,9 +1,10 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://MatchGame/scenes/pause.gd" type="Script" id=1]
+[ext_resource path="res://MatchGame/scripts/pause.gd" type="Script" id=1]
 [ext_resource path="res://MatchGame/images/pause_container.png" type="Texture" id=2]
 [ext_resource path="res://MatchGame/images/back_menu_large.png" type="Texture" id=3]
 [ext_resource path="res://MatchGame/images/continue_pause_button.png" type="Texture" id=4]
+
 
 [sub_resource type="Animation" id=1]
 resource_name = "slide_in_right"

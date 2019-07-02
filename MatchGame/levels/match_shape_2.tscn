@@ -39,5 +39,5 @@ func _on_ready():
 
 [node name="shape_2" instance=ExtResource( 1 )]
 script = SubResource( 1 )
-level = 2
+level = "2"
 key_timer = 5

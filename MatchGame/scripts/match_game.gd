@@ -1,7 +1,7 @@
 extends Node2D
 
 # Game Variabel
-export (int) var level
+export (String) var level
 export (int) var total_used_keyword = 10
 export (int) var key_timer = 5
 
@@ -94,5 +94,4 @@ func _on_game_game_end():
 	print("Result : " + str(score) + "( " + str(star) + ")")
 	$game/star.game_result(star, score)
 	var unlocked = star > 0
-	GameDataManager.save_data(level, unlocked, score, star)
-	GameDataManager.unlock_next_level(level)
+	GameDataManager.save_data(level, score, star)

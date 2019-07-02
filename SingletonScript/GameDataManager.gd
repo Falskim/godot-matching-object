@@ -1,68 +1,72 @@
 extends Node
 
 var debug_mode = true
+var minimum_star = 1
 var level_info = {}
-var default_level_info = {
-	1:{
-		"unlocked" : true,
-		"high_score" : 0,
-		"stars_unlocked" : 0
-		}
-	}
 
-onready var path = "user://save.dat"
+onready var save_path = "user://save.dat"
 
 func _ready():
 	load_data()
 
-func save_data(level, unlocked = false, score = 0, star = 0):
+func save_data(level, score = 0, star = 0):
+	var requirement_met = star >= minimum_star
+	if requirement_met:
+		unlock_next_level(level)
 	level_info[level] = {
-			"unlocked" : unlocked,
+			"unlocked" : true,
 			"high_score" : score,
 			"stars_unlocked" : star
 		}
 	_save_data()
 
+func unlock_next_level(level):
+	var next_level = str(int(level) + 1)
+	level_info[next_level] = {
+		"unlocked" : true,
+		"high_score" : 0,
+		"stars_unlocked" : 0
+	}
+
 func _save_data():
+	var data = level_info
 	var file = File.new()
-	var err = file.open(path, File.WRITE)
+	var err = file.open(save_path, File.WRITE)
 	if err != OK:
 		print ("Saving data file error")
 		return
-	file.store_var(level_info)
+	file.store_line(to_json(data))
 	file.close()
 	if debug_mode:
 		print("Saving Data : ")
-		print(level_info)
+		print(data)
 
 func load_data():
 	level_info = _load_data()
 
 func _load_data():
+	var default_level_info = {
+	"1":{
+		"unlocked" : true,
+		"high_score" : 0,
+		"stars_unlocked" : 0
+		}
+	}
 	var file = File.new()
-	var err = file.open(path, File.READ)
+	var err = file.open(save_path, File.READ)
 	if err != OK:
 		print("Load data file error, returning default values")
 		return default_level_info
-	var read = {}
-	read = file.get_var()
+	var json = file.get_as_text()
+	file.close()
+	var data = parse_json(json)
 	if debug_mode:
-		print("Loading data :")
-		print(read)
-	return read
+		print("Load json : ")
+		print("> JSON : " + json)
+		print("> Parsed json : " + str(data))
+	return data
 
 func reset_data():
-	var file = File.new()
-	var err = file.open(path, File.WRITE)
-	if err != OK:
-		print ("Reset data file error")
-		return
-	file.store_var(default_level_info)
-	file.close()
+	var dir = Directory.new()
+	dir.remove(save_path)
 	load_data()
-	if debug_mode:
-		print("Default reset data : ")
-		print(default_level_info)
-
-func unlock_next_level(level):
-	save_data(level + 1, true)

@@ -15,23 +15,22 @@ script = ExtResource( 2 )
 texture = ExtResource( 3 )
 
 [node name="Control" type="Control" parent="." index="2"]
-editor/display_folded = true
 margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="shape_1" parent="Control" index="0" instance=ExtResource( 4 )]
 position = Vector2( 94.5807, 67.2284 )
-level = 1
+level = "1"
 level_to_load = "res://MatchGame/levels/match_shape_1.tscn"
 
 [node name="shape_2" parent="Control" index="1" instance=ExtResource( 4 )]
 position = Vector2( 360.414, 64.9563 )
-level = 2
+level = "2"
 level_to_load = "res://MatchGame/levels/match_shape_2.tscn"
 
 [node name="shape_3" parent="Control" index="2" instance=ExtResource( 4 )]
 position = Vector2( 99.1249, 296.709 )
-level = 3
+level = "3"
 level_to_load = "res://MatchGame/levels/match_shape_3.tscn"
 
 [node name="reset_button" type="TextureButton" parent="." index="3"]

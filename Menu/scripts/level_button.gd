@@ -1,6 +1,6 @@
 extends Node2D
 
-export (int) var level
+export (String) var level
 export (String) var level_to_load
 export (bool) var enabled
 export (int) var total_star
@@ -17,22 +17,33 @@ onready var level_label = $button/level_label
 onready var button = $button
 onready var star = $star
 
+var data = {}
+var test = {
+	"1":{
+		"unlocked" : true,
+		"high_score" : 0,
+		"stars_unlocked" : 0
+		}
+	}
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	load_save_data()
 	setup()
 	
 func load_save_data():
+	data = GameDataManager.level_info
 	if GameDataManager.level_info.has(level):
 		enabled = GameDataManager.level_info[level]["unlocked"]
 		total_star = GameDataManager.level_info[level]["stars_unlocked"]
+		print("Level " + level + " enabled")
 	else:
 		enabled = false
 		total_star = 0
+		print("Level " + level + " disabled")
 	
 func setup():
 	# Setting texture and label
-	level_label.set_text(str(level))
+	level_label.set_text(level)
 	button.set_normal_texture(open_texture)
 	button.set_disabled_texture(blocked_texture)
 	
